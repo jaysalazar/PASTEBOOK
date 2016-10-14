@@ -7,6 +7,6 @@ namespace PastebookWebApplication.Managers
 {
     public class RegistrationManager
     {
-        //
+        //test2
     }
 }
