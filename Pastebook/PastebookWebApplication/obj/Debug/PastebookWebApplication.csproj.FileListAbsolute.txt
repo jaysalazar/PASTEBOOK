@@ -1,4 +1,3 @@
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\obj\Debug\PastebookWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\ApplicationInsights.config
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\roslyn\csc.exe
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -37,7 +36,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\b
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.WebPages.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.WebPages.Razor.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\WebGrease.dll
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookEntities.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookDataAccess.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookBusinessLogic.pdb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\EntityFramework.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\EntityFramework.SqlServer.xml
@@ -56,6 +55,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\b
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.WebPages.Razor.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\Antlr3.Runtime.pdb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\Newtonsoft.Json.xml
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookEntities.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookDataAccess.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\obj\Debug\PastebookWebApplication.csprojResolveAssemblyReference.cache
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\obj\Debug\PastebookWebApplication.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\obj\Debug\PastebookWebApplication.pdb

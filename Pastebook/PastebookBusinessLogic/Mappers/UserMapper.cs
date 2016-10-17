@@ -1,12 +1,12 @@
 ﻿using PastebookBusinessLogic.Entities;
-using PastebookEntities;
+using PastebookDataAccess;
 
 namespace PastebookBusinessLogic.Mappers
 {
     public static class UserMapper
     {
         //modelUI to modelEF
-        public static PB_USER MapUserEntityUIToUserEntityEF(LogInEntity userEntityUI)
+        public static PB_USER MapUserEntityUIToUserEntityEF(UserEntity userEntityUI)
         {
             PB_USER userEntityEF = new PB_USER()
             {
@@ -19,9 +19,9 @@ namespace PastebookBusinessLogic.Mappers
         }
 
         //modelEF to modelUI
-        public static LogInEntity MapUserEntityEFToUserEntityUI(PB_USER userEntityEF)
+        public static UserEntity MapUserEntityEFToUserEntityUI(PB_USER userEntityEF)
         {
-            LogInEntity userEntityUI = new LogInEntity()
+            UserEntity userEntityUI = new UserEntity()
             {
                 Username = userEntityEF.USER_NAME,
                 Salt = userEntityEF.SALT,

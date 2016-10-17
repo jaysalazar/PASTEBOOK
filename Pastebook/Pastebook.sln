@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PastebookWebApplication.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PastebookBusinessLogic", "PastebookBusinessLogic\PastebookBusinessLogic.csproj", "{183D2988-8064-4FCD-97BE-6824736255B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PastebookEntities", "PastebookEntities\PastebookEntities.csproj", "{8DF8F135-215D-46EB-AD20-8EF1540584C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PastebookDataAccess", "PastebookEntities\PastebookDataAccess.csproj", "{8DF8F135-215D-46EB-AD20-8EF1540584C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

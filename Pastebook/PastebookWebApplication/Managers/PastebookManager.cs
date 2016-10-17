@@ -9,9 +9,9 @@ namespace PastebookWebApplication.Managers
     {
         LogInManager logInManager = new LogInManager();
 
-        public int CreateUser(LogInModel userModel)
+        public int CreateUser(UserModel userModel)
         {
-            LogInEntity userEntity = new LogInEntity();
+            UserEntity userEntity = new UserEntity();
 
             userEntity = UserMapper.MapUserModelToUserEntity(userModel);
 
@@ -20,10 +20,10 @@ namespace PastebookWebApplication.Managers
             return result;
         }
 
-        public LogInModel RetrieveUser(string username)
+        public UserModel RetrieveUser(string username)
         {
-            LogInModel userModel = new LogInModel();
-            LogInEntity userEntity = new LogInEntity();
+            UserModel userModel = new UserModel();
+            UserEntity userEntity = new UserEntity();
 
             userEntity = logInManager.RetrieveUser(username);
 

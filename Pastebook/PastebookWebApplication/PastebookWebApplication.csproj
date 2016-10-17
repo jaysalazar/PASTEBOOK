@@ -163,8 +163,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Managers\PastebookManager.cs" />
-    <Compile Include="Models\LogInModel.cs" />
-    <Compile Include="Models\RegistrationModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

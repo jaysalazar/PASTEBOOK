@@ -6,9 +6,9 @@ namespace PastebookWebApplication.Mappers
     public static class UserMapper
     {
         //modelMVC as modelUI
-        public static LogInEntity MapUserModelToUserEntity(LogInModel userModel)
+        public static UserEntity MapUserModelToUserEntity(UserModel userModel)
         {
-            LogInEntity userEntity = new LogInEntity()
+            UserEntity userEntity = new UserEntity()
             {
                 Username = userModel.Username,
                 Salt = userModel.Salt,
@@ -19,9 +19,9 @@ namespace PastebookWebApplication.Mappers
         }
 
         //modelUI as modelMVC
-        public static LogInModel MapUserEntityToUserModel(LogInEntity userEntity)
+        public static UserModel MapUserEntityToUserModel(UserEntity userEntity)
         {
-            LogInModel userModel = new LogInModel()
+            UserModel userModel = new UserModel()
             {
                 Username = userEntity.Username,
                 Salt = userEntity.Salt,

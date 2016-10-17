@@ -54,8 +54,7 @@
     <Compile Include="BusinessLogic\PasswordManager.cs" />
     <Compile Include="BusinessLogic\SaltGenerator.cs" />
     <Compile Include="BusinessLogic\Utility.cs" />
-    <Compile Include="Entities\LogInEntity.cs" />
-    <Compile Include="Entities\RegistrationEntity.cs" />
+    <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -64,9 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PastebookEntities\PastebookEntities.csproj">
+    <ProjectReference Include="..\PastebookEntities\PastebookDataAccess.csproj">
       <Project>{8df8f135-215d-46eb-ad20-8ef1540584c3}</Project>
-      <Name>PastebookEntities</Name>
+      <Name>PastebookDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

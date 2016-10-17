@@ -1,6 +1,6 @@
 ﻿using PastebookBusinessLogic.Entities;
 using PastebookBusinessLogic.Mappers;
-using PastebookEntities;
+using PastebookDataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace PastebookBusinessLogic.BusinessLogic
         PasswordManager passwordManager = new PasswordManager();
         List<Exception> exceptionList;
 
-        public int CreateUser(LogInEntity userEntityUI)
+        public int CreateUser(UserEntity userEntityUI)
         {
             int result = 0;
             PB_USER userEntityEF = new PB_USER();
@@ -36,9 +36,9 @@ namespace PastebookBusinessLogic.BusinessLogic
             return result;
         }
 
-        public LogInEntity RetrieveUser(string username)
+        public UserEntity RetrieveUser(string username)
         {
-            LogInEntity userEntityUI = new LogInEntity();
+            UserEntity userEntityUI = new UserEntity();
 
             PB_USER userEntityEF = new PB_USER();
 

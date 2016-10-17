@@ -1,0 +1,9 @@
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookDataAccess.dll.config
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookDataAccess.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookDataAccess.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.xml
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookDataAccess.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookDataAccess.pdb

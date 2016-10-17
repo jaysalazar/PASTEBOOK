@@ -7,7 +7,6 @@ namespace PastebookWebApplication.Controllers
     public class RegisterController : Controller
     {
         PasteBookManager manager = new PasteBookManager();
-        LogInModel userModel;
 
         // GET: Register
         public ActionResult Register()
@@ -17,7 +16,7 @@ namespace PastebookWebApplication.Controllers
 
         public JsonResult RegisterUser(string username, string password)
         {
-            userModel = new LogInModel()
+            UserModel userModel = new UserModel()
             {
                 Username = username,
                 PasswordHash = password

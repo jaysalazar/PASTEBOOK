@@ -9,7 +9,6 @@ namespace PastebookWebApplication.Controllers
     {
         PasteBookManager pastebookManager = new PasteBookManager();
         PasswordManager passwordManager = new PasswordManager();
-        LogInModel userModel;
 
         public ActionResult LogIn()
         {
@@ -18,7 +17,7 @@ namespace PastebookWebApplication.Controllers
 
         public JsonResult LogInUser(string username, string password)
         {
-            userModel = new LogInModel();
+            UserModel userModel = new UserModel();
 
             userModel = pastebookManager.RetrieveUser(username);
             
