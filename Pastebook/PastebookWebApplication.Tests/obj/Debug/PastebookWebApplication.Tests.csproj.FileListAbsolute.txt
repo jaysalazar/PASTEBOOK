@@ -1,0 +1,1 @@
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\obj\Debug\PastebookWebApplication.Tests.csprojResolveAssemblyReference.cache
