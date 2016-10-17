@@ -162,13 +162,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\HashComputer.cs" />
-    <Compile Include="Managers\LogInManager.cs" />
+    <Compile Include="Managers\PastebookManager.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegistrationModel.cs" />
-    <Compile Include="Managers\PasswordManager.cs" />
-    <Compile Include="Managers\SaltGenerator.cs" />
-    <Compile Include="Managers\Utility.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -208,7 +204,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Home\_ViewStart.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -227,9 +223,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PastebookDBEntities\PastebookDBEntities.csproj">
-      <Project>{8fe936fa-ec83-4015-81ef-409a1e703f86}</Project>
-      <Name>PastebookDBEntities</Name>
+    <ProjectReference Include="..\PastebookBusinessLogic\PastebookBusinessLogic.csproj">
+      <Project>{183d2988-8064-4fcd-97be-6824736255b8}</Project>
+      <Name>PastebookBusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
