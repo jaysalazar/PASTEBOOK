@@ -65,6 +65,7 @@ namespace PastebookWebApplication.Controllers
                 {
                     if (ModelState.IsValid)
                     {
+                        Session["CurrentUserID"] = userModel.Username;
                         Session["CurrentUser"] = userModel;
 
                         return RedirectToAction("Index", "Home", userModel);
@@ -77,22 +78,28 @@ namespace PastebookWebApplication.Controllers
             }
             else
             {
-                ModelState.AddModelError("EmailAddress", "Email doesn't match any account");
+                ModelState.AddModelError("EmailAddress", "Email Address doesn't match any account");
             }
 
             return View("LogIn");
         }
 
+        public ActionResult LogOut()
+        {
+            Session.Abandon();
+            return RedirectToAction("LogIn");
+        }
+
         public JsonResult CheckEmail(string emailAddress)
         {
             bool result = manager.CheckEmailAddress(emailAddress);
-            return Json(new { Result = result }, JsonRequestBehavior.AllowGet);
+            return Json(new { Result = result });
         }
 
         public JsonResult CheckUsername(string username)
         {
             bool result = manager.CheckUsername(username);
-            return Json(new { Result = result }, JsonRequestBehavior.AllowGet);
+            return Json(new { Result = result });
         }
     }
 }

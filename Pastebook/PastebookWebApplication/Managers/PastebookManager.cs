@@ -17,9 +17,9 @@ namespace PastebookWebApplication.Managers
             UserEntity userEntity = new UserEntity();
 
             string salt = "";
+
             userModel.PasswordHash = passwordManager.GeneratePasswordHash(userModel.PasswordHash, out salt);
             userModel.Salt = salt;
-            
             userEntity = UserMapper.MapUserModelToUserEntity(userModel);
 
             int result = logInManager.CreateUser(userEntity);
@@ -33,7 +33,6 @@ namespace PastebookWebApplication.Managers
             UserEntity userEntity = new UserEntity();
 
             userEntity = logInManager.RetrieveUser(emailAddress);
-
             userModel = UserMapper.MapUserEntityToUserModel(userEntity);
 
             return userModel;
@@ -59,14 +58,12 @@ namespace PastebookWebApplication.Managers
         public bool CheckEmailAddress(string emailAddress)
         {
             bool result = logInManager.CheckEmailAddress(emailAddress);
-
             return result;
         }
 
         public bool CheckUsername(string username)
         {
             bool result = logInManager.CheckUsername(username);
-
             return result;
         }
     }

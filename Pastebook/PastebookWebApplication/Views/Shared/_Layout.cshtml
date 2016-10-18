@@ -10,17 +10,32 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            @{ if(Session[CurrentUserID] != null)
+{
             <div class="navbar-header">
                 @Html.ActionLink("Pastebook", "LogIn", "Pastebook", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                <ul class="navbar-nav"><li>@Html.Textbox("Search")</li></ul>
                 <ul class="nav navbar-nav pull-right">
-                    @*show navs when logged in*@
+                    @*section home and user link*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("[User link to profile]", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Logout", "LogIn", "Pastebook")</li>
+                    <li>@Html.ActionLink(Session["CurrentUser"].FirstName, "Index", "Home")</li>
+                    <li>@Html.ActionLink("Friends", "LogIn", "Pastebook")</li>
+                    <li>@Html.ActionLink("Notifications", "LogIn", "Pastebook")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Account
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Settings", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Logout", "LogOut", "Pastebook")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
+            }}
         </div>
     </div>
     <div class="container body-content">
