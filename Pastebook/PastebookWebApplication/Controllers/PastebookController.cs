@@ -65,10 +65,15 @@ namespace PastebookWebApplication.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        Session["CurrentUserID"] = userModel.Username;
-                        Session["CurrentUser"] = userModel;
+                        Session["CurrentUserId"] = userModel.Username;
+                        Session["FirstName"] = userModel.FirstName;
+                        UserModel user = (UserModel)Session["model"];
+                        return RedirectToAction("Index", "Home");
 
-                        return RedirectToAction("Index", "Home", userModel);
+                        //UserModel user = (UserModel)Session["userNameSession"];
+                        //int result = routeManager.RemovePreferredRoute(id, user.Username);
+                        //return RedirectToAction("RouteWishlist");
+
                     }
                 }
                 else

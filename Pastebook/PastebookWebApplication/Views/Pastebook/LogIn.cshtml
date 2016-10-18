@@ -29,7 +29,6 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Login" class="btn btn-default" id="btnLogIn" />
-                @*@Html.ActionLink("LogIn", "LogIn", "LogIn", new { @class = "btn btn-default", id = "btnLogIn", type = "submit" })*@
                 @Html.ActionLink("Register", "Register", "Pastebook", new { @class = "btn btn-default" })
             </div>
         </div>
@@ -38,38 +37,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
-    @*<script>
-            var LogInUserUrl = '@Url.Action("LogInUser", "LogIn")'
-        </script>
-
-        <script>
-            $(document).ready(function () {
-
-                $("#btnLogIn").click(function () {
-                    var data = {
-                        email: $('#txtLogInEmailAddress').val(),
-                        password: $('#txtLogInPassword').val()
-                    }
-
-                    $.ajax({
-                        url: LogInUserUrl,
-                        data: data,
-                        type: 'POST',
-                        success: function (data) {
-                            alert('success');
-
-                            //go to home page
-                            //if (data.result) {
-                            //    initializeClientPageTimeOut();
-                            //    location.reload();
-                            //}
-                        },
-
-                        error: function () {
-                            alert('Something went wrong.')
-                        }
-                    })
-                });
-            });
-        </script>*@
 }

@@ -6,52 +6,67 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        li.txtSearch {
+            margin: 8px auto;
+        }
+
+        .btnSearch {
+            margin: 8px 170px 8px 5px;
+        }
+
+        .txtSearch {
+            width: 250px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            @{ if(Session[CurrentUserID] != null)
+            @if (Session["CurrentUserId"] != null)
             {
-            <div class="navbar-header">
-                @Html.ActionLink("Pastebook", "LogIn", "Pastebook", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="navbar-nav"><li>@Html.Textbox("Search")</li></ul>
-                <ul class="nav navbar-nav pull-right">
-                    @*section home and user link*@
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink(Session["CurrentUser"].FirstName, "Index", "Home")</li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Friends
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Notifications
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Notification", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Notification", "Index", "Home")</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Account
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Settings", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Logout", "LogOut", "Pastebook")</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            }}
+                <div class="navbar-header">
+                    @Html.ActionLink("Pastebook", "LogIn", "Pastebook", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="txtSearch"><input type="text" class="form-control txtSearch" placeholder="Search for people you know..."></li>
+                        <li class="btnSearch"><button class="btn btn-default">Go</button></li>
+                        @*section home and user link*@
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink(Session["FirstName"].ToString(), "Index", "Home")</li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Friends
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Notifications
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Notification", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Notification", "Index", "Home")</li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Account
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Settings", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Logout", "LogOut", "Pastebook")</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     <div class="container body-content">

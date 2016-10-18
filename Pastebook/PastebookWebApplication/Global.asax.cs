@@ -17,13 +17,5 @@ namespace PastebookWebApplication
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-
-        // source: http://stackoverflow.com/questions/27738174/clear-session-on-logout-mvc-4
-        //protected void Application_BeginRequest()
-        //{
-        //    Response.Cache.SetCacheability(HttpCacheability.NoCache);
-        //    Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-        //    Response.Cache.SetNoStore();
-        //}
     }
 }
