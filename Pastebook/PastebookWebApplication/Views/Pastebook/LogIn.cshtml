@@ -1,5 +1,9 @@
 ﻿@model PastebookWebApplication.Models.UserModel
 
+@{
+    ViewBag.Title = "Pastebook";
+}
+
 @using (Html.BeginForm("Index", "Pastebook", FormMethod.Post))
 {
     <div class="form-horizontal">

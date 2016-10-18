@@ -1,5 +1,9 @@
 ﻿@model PastebookWebApplication.Models.UserModel
 
+@{
+    ViewBag.Title = "Pastebook";
+}
+
 <div>
     <h4>Success!</h4>
     <hr />
@@ -10,30 +14,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PasswordHash)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Salt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Salt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ConfirmPassword)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ConfirmPassword)
         </dd>
 
         <dt>

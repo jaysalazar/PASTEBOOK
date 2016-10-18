@@ -11,7 +11,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             @{ if(Session[CurrentUserID] != null)
-{
+            {
             <div class="navbar-header">
                 @Html.ActionLink("Pastebook", "LogIn", "Pastebook", new { area = "" }, new { @class = "navbar-brand" })
             </div>
@@ -21,8 +21,24 @@
                     @*section home and user link*@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink(Session["CurrentUser"].FirstName, "Index", "Home")</li>
-                    <li>@Html.ActionLink("Friends", "LogIn", "Pastebook")</li>
-                    <li>@Html.ActionLink("Notifications", "LogIn", "Pastebook")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Friends
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Notifications
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Notification", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Notification", "Index", "Home")</li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             Account
