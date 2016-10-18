@@ -10,7 +10,7 @@ namespace PastebookBusinessLogic.Entities
 
         public string Salt { get; set; }
 
-        public string ConfirmPasswordHash { get; set; }
+        public string ConfirmPassword { get; set; }
 
         public string FirstName { get; set; }
 
@@ -22,7 +22,7 @@ namespace PastebookBusinessLogic.Entities
 
         public DateTime Birthday { get; set; }
 
-        public string Country { get; set; }
+        public int CountryId { get; set; }
 
         public string MobileNumber { get; set; }
     }

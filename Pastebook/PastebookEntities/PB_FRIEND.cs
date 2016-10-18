@@ -23,5 +23,6 @@ namespace PastebookDataAccess
     
         public virtual PB_USER PB_USER { get; set; }
         public virtual PB_USER PB_USER1 { get; set; }
+        public virtual PB_USER PB_USER2 { get; set; }
     }
 }

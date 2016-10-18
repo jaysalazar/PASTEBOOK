@@ -18,6 +18,7 @@ namespace PastebookBusinessLogic.BusinessLogic
             PB_USER userEntityEF = new PB_USER();
 
             userEntityEF = UserMapper.MapUserEntityUIToUserEntityEF(userEntityUI);
+            userEntityEF.DATE_CREATED = DateTime.Now;
 
             using (var context = new PASTEBOOK_DBEntities())
             {
@@ -36,7 +37,7 @@ namespace PastebookBusinessLogic.BusinessLogic
             return result;
         }
 
-        public UserEntity RetrieveUser(string username)
+        public UserEntity RetrieveUser(string emailAddress)
         {
             UserEntity userEntityUI = new UserEntity();
 
@@ -46,7 +47,9 @@ namespace PastebookBusinessLogic.BusinessLogic
             {
                 try
                 {
-                    userEntityEF = context.PB_USER.Single(u => u.USER_NAME == username);
+                    userEntityEF = context.PB_USER.Single(u => u.EMAIL_ADDRESS == emailAddress);
+
+                    userEntityUI = UserMapper.MapUserEntityEFToUserEntityUI(userEntityEF);
                 }
                 catch (Exception ex)
                 {
@@ -55,9 +58,47 @@ namespace PastebookBusinessLogic.BusinessLogic
                 }
             }
 
-            userEntityUI = UserMapper.MapUserEntityEFToUserEntityUI(userEntityEF);
-
             return userEntityUI;
+        }
+
+        public bool CheckEmailAddress(string emailAddress)
+        {
+            bool result = false;
+
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    result = context.PB_USER.Any(x => x.EMAIL_ADDRESS == emailAddress);
+                }
+                catch (Exception ex)
+                {
+                    exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return result;
+        }
+
+        public bool CheckUsername(string username)
+        {
+            bool result = false;
+
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    result = context.PB_USER.Any(x => x.USER_NAME == username);
+                }
+                catch (Exception ex)
+                {
+                    exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return result;
         }
     }
 }

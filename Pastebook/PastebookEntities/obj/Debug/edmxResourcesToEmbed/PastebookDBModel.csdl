@@ -25,6 +25,7 @@
     <Property Name="CREATED_DATE" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="PB_USER" Relationship="Self.FK_PB_FRIEND_PB_USER" FromRole="PB_FRIEND" ToRole="PB_USER" />
     <NavigationProperty Name="PB_USER1" Relationship="Self.FK_PB_FRIEND_PB_USER1" FromRole="PB_FRIEND" ToRole="PB_USER" />
+    <NavigationProperty Name="PB_USER2" Relationship="PASTEBOOK_DBModel.FK_PB_FRIEND_PB_USER2" FromRole="PB_FRIEND" ToRole="PB_USER" />
   </EntityType>
   <EntityType Name="PB_LIKE">
     <Key>
@@ -73,19 +74,19 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="USER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="SALT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="FIRST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LAST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="BIRTHDAY" Type="DateTime" Precision="0" />
+    <Property Name="USER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PASSWORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SALT" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LAST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BIRTHDAY" Type="DateTime" Precision="0" Nullable="false" />
     <Property Name="COUNTRY_ID" Type="Int32" />
     <Property Name="MOBILE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="GENDER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="GENDER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="PROFILE_PIC" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <Property Name="DATE_CREATED" Type="DateTime" Precision="3" />
+    <Property Name="DATE_CREATED" Type="DateTime" Precision="3" Nullable="false" />
     <Property Name="ABOUT_ME" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-    <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL_ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="PB_COMMENT" Relationship="Self.FK_PB_COMMENT_PB_USER" FromRole="PB_USER" ToRole="PB_COMMENT" />
     <NavigationProperty Name="PB_FRIEND" Relationship="Self.FK_PB_FRIEND_PB_USER" FromRole="PB_USER" ToRole="PB_FRIEND" />
     <NavigationProperty Name="PB_FRIEND1" Relationship="Self.FK_PB_FRIEND_PB_USER1" FromRole="PB_USER" ToRole="PB_FRIEND" />
@@ -95,6 +96,7 @@
     <NavigationProperty Name="PB_POST" Relationship="Self.FK_PB_POST_PB_USER" FromRole="PB_USER" ToRole="PB_POST" />
     <NavigationProperty Name="PB_POST1" Relationship="Self.FK_PB_POST_PB_USER1" FromRole="PB_USER" ToRole="PB_POST" />
     <NavigationProperty Name="REF_COUNTRY" Relationship="Self.FK_PB_USER_REF_COUNTRY" FromRole="PB_USER" ToRole="REF_COUNTRY" />
+    <NavigationProperty Name="PB_FRIEND2" Relationship="PASTEBOOK_DBModel.FK_PB_FRIEND_PB_USER2" FromRole="PB_USER" ToRole="PB_FRIEND" />
   </EntityType>
   <EntityType Name="REF_COUNTRY">
     <Key>
@@ -331,5 +333,21 @@
       <End Role="REF_COUNTRY" EntitySet="REF_COUNTRY" />
       <End Role="PB_USER" EntitySet="PB_USER" />
     </AssociationSet>
+    <AssociationSet Name="FK_PB_FRIEND_PB_USER2" Association="PASTEBOOK_DBModel.FK_PB_FRIEND_PB_USER2">
+      <End Role="PB_USER" EntitySet="PB_USER" />
+      <End Role="PB_FRIEND" EntitySet="PB_FRIEND" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_PB_FRIEND_PB_USER2">
+    <End Type="PASTEBOOK_DBModel.PB_USER" Role="PB_USER" Multiplicity="1" />
+    <End Type="PASTEBOOK_DBModel.PB_FRIEND" Role="PB_FRIEND" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PB_USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PB_FRIEND">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

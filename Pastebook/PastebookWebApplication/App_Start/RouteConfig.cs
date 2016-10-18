@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace PastebookWebApplication
@@ -16,7 +12,7 @@ namespace PastebookWebApplication
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Register", action = "Register", id = UrlParameter.Optional }
+                defaults: new { controller = "Pastebook", action = "LogIn", id = UrlParameter.Optional }
             );
         }
     }

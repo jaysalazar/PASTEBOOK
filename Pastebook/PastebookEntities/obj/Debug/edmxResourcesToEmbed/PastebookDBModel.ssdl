@@ -57,19 +57,19 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="USER_NAME" Type="varchar" MaxLength="50" />
-    <Property Name="PASSWORD" Type="varchar" MaxLength="50" />
-    <Property Name="SALT" Type="varchar" MaxLength="100" />
-    <Property Name="FIRST_NAME" Type="varchar" MaxLength="50" />
-    <Property Name="LAST_NAME" Type="varchar" MaxLength="50" />
-    <Property Name="BIRTHDAY" Type="date" />
+    <Property Name="USER_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SALT" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FIRST_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LAST_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BIRTHDAY" Type="date" Nullable="false" />
     <Property Name="COUNTRY_ID" Type="int" />
     <Property Name="MOBILE_NO" Type="varchar" MaxLength="50" />
-    <Property Name="GENDER" Type="char" MaxLength="1" />
+    <Property Name="GENDER" Type="char" MaxLength="1" Nullable="false" />
     <Property Name="PROFILE_PIC" Type="varbinary(max)" />
-    <Property Name="DATE_CREATED" Type="datetime" />
+    <Property Name="DATE_CREATED" Type="datetime" Nullable="false" />
     <Property Name="ABOUT_ME" Type="varchar" MaxLength="2000" />
-    <Property Name="EMAIL_ADDRESS" Type="varchar" MaxLength="50" />
+    <Property Name="EMAIL_ADDRESS" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="REF_COUNTRY">
     <Key>
@@ -120,7 +120,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="PB_FRIEND">
-        <PropertyRef Name="FRIEND_ID" />
+        <PropertyRef Name="USER_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -216,7 +216,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="PB_POST">
-        <PropertyRef Name="PROFILE_OWNER_ID" />
+        <PropertyRef Name="POSTER_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -228,7 +228,7 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="PB_POST">
-        <PropertyRef Name="POSTER_ID" />
+        <PropertyRef Name="PROFILE_OWNER_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

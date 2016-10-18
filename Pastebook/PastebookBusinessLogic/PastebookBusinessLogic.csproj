@@ -49,12 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\CountryManager.cs" />
     <Compile Include="BusinessLogic\HashComputer.cs" />
     <Compile Include="BusinessLogic\LogInManager.cs" />
     <Compile Include="BusinessLogic\PasswordManager.cs" />
     <Compile Include="BusinessLogic\SaltGenerator.cs" />
     <Compile Include="BusinessLogic\Utility.cs" />
+    <Compile Include="Entities\CountryEntity.cs" />
     <Compile Include="Entities\UserEntity.cs" />
+    <Compile Include="Mappers\CountryMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -25,6 +25,7 @@ namespace PastebookDataAccess
             this.PB_NOTIFICATION1 = new HashSet<PB_NOTIFICATION>();
             this.PB_POST = new HashSet<PB_POST>();
             this.PB_POST1 = new HashSet<PB_POST>();
+            this.PB_FRIEND2 = new HashSet<PB_FRIEND>();
         }
     
         public int ID { get; set; }
@@ -33,12 +34,12 @@ namespace PastebookDataAccess
         public string SALT { get; set; }
         public string FIRST_NAME { get; set; }
         public string LAST_NAME { get; set; }
-        public Nullable<System.DateTime> BIRTHDAY { get; set; }
+        public System.DateTime BIRTHDAY { get; set; }
         public Nullable<int> COUNTRY_ID { get; set; }
         public string MOBILE_NO { get; set; }
         public string GENDER { get; set; }
         public byte[] PROFILE_PIC { get; set; }
-        public Nullable<System.DateTime> DATE_CREATED { get; set; }
+        public System.DateTime DATE_CREATED { get; set; }
         public string ABOUT_ME { get; set; }
         public string EMAIL_ADDRESS { get; set; }
     
@@ -59,5 +60,7 @@ namespace PastebookDataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PB_POST> PB_POST1 { get; set; }
         public virtual REF_COUNTRY REF_COUNTRY { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PB_FRIEND> PB_FRIEND2 { get; set; }
     }
 }

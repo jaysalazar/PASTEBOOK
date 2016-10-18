@@ -12,7 +12,15 @@ namespace PastebookWebApplication.Mappers
             {
                 Username = userModel.Username,
                 Salt = userModel.Salt,
-                PasswordHash = userModel.PasswordHash
+                PasswordHash = userModel.PasswordHash,
+                ConfirmPassword = userModel.ConfirmPassword,
+                FirstName = userModel.FirstName,
+                LastName = userModel.LastName,
+                Gender = userModel.Gender,
+                EmailAddress = userModel.EmailAddress,
+                Birthday = userModel.Birthday,
+                CountryId = userModel.CountryId,
+                MobileNumber = userModel.MobileNumber
             };
 
             return userEntity;
@@ -25,7 +33,15 @@ namespace PastebookWebApplication.Mappers
             {
                 Username = userEntity.Username,
                 Salt = userEntity.Salt,
-                PasswordHash = userEntity.PasswordHash
+                PasswordHash = userEntity.PasswordHash,
+                ConfirmPassword = userEntity.ConfirmPassword,
+                FirstName = userEntity.FirstName,
+                LastName = userEntity.LastName,
+                Gender = userEntity.Gender,
+                EmailAddress = userEntity.EmailAddress,
+                Birthday = userEntity.Birthday,
+                CountryId = userEntity.CountryId,
+                MobileNumber = userEntity.MobileNumber
             };
 
             return userModel;

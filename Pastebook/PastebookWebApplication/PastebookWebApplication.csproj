@@ -157,12 +157,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LogInController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\PastebookController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Managers\PastebookManager.cs" />
+    <Compile Include="Mappers\CountryMapper.cs" />
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,8 +208,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\LogIn\LogIn.cshtml" />
-    <Content Include="Views\Register\Register.cshtml" />
+    <Content Include="Views\Pastebook\LogIn.cshtml" />
+    <Content Include="Views\Pastebook\Register.cshtml" />
+    <Content Include="Views\Pastebook\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

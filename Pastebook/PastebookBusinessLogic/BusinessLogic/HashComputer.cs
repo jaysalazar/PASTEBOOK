@@ -8,7 +8,7 @@ namespace PastebookBusinessLogic.BusinessLogic
     {
         public string GetPasswordHashAndSalt(string message)
         {
-            SHA512 sha = new SHA512CryptoServiceProvider();
+            SHA256 sha = new SHA256CryptoServiceProvider();
             byte[] dataBytes = Utility.GetBytes(message);
             byte[] resultBytes = sha.ComputeHash(dataBytes);
 
