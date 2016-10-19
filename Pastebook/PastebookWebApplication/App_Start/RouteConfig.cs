@@ -19,7 +19,7 @@ namespace PastebookWebApplication
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Pastebook", action = "LogIn", id = UrlParameter.Optional }
+                defaults: new { controller = "User", action = "LogIn", id = UrlParameter.Optional }
             );
         }
     }
