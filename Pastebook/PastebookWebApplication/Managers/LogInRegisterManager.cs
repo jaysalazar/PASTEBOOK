@@ -48,7 +48,7 @@ namespace PastebookWebApplication.Managers
 
             foreach (var country in countryList)
             {
-                countryModel = CountryMapper.MapCountryEntityEFToCountryEntityUI(country);
+                countryModel = CountryMapper.MapCountryEntityToCountryModel(country);
                 Countries.Add(countryModel);
             }
 

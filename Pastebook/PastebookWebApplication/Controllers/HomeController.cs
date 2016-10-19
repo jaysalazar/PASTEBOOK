@@ -1,5 +1,5 @@
-﻿using PastebookBusinessLogic.BusinessLogic;
-using PastebookWebApplication.Managers;
+﻿using PastebookWebApplication.Managers;
+using PastebookWebApplication.Mappers;
 using PastebookWebApplication.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,8 @@ namespace PastebookWebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        LogInRegisterManager manager = new LogInRegisterManager();
+        LogInRegisterManager userManager = new LogInRegisterManager();
+        ProfileManager postManager = new ProfileManager();
 
         //newsfeed
         public ActionResult Index()
@@ -25,14 +26,46 @@ namespace PastebookWebApplication.Controllers
         }
 
         //profile
+        [HttpGet]
         public ActionResult UserProfile(string username)
         {
             if (Session["CurrentUser"] != null)
             {
                 string email = (string)Session["CurrentUser"];
-                UserModel userModel = manager.RetrieveUser(email);
+                UserProfileModel profileModel = new UserProfileModel();
 
-                return View("Profile", userModel);
+                UserModel userModel = new UserModel();
+                userModel = userManager.RetrieveUser(email);
+
+                profileModel.User = userModel;
+
+                return View(profileModel);
+            }
+
+            return RedirectToAction("LogIn", "User");
+        }
+
+        [HttpPost]
+        public ActionResult Timeline(UserProfileModel profileModel)
+        {
+            //string email = (string)Session["CurrentUser"];
+
+            //UserModel userModel = new UserModel();
+            //userModel = manager.RetrieveUser(email);
+
+            if (Session["CurrentUser"] != null)
+            {
+                PostModel postModel = new PostModel()
+                {
+                    PosterId = profileModel.User.UserId,
+                    ProfileOwnerId = profileModel.User.UserId,
+                    Content = profileModel.Post.Content
+                };
+
+                postManager.CreatePost(postModel);
+                //ViewBag.Posts = postManager.RetrieveAllPosts();
+
+                return View(postModel);
             }
 
             return RedirectToAction("LogIn", "User");

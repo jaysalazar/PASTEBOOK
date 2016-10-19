@@ -7,6 +7,8 @@ namespace PastebookWebApplication.Models
 {
     public class UserModel
     {
+        public int UserId { get; set; }
+
         [Required(ErrorMessage = "{0} field is required")]
         public string Username { get; set; }
 

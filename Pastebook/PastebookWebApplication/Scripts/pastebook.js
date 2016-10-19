@@ -41,9 +41,23 @@
         }
     })
 
-    //test
-    $('#btnLogIn').click(function () {
-        var data = $('.form-control').val();
-        $.trim(data);
-    })
+    //$('#btnPost').click(function () {
+    //    var data = {
+    //        content: '#txtContent'
+    //    }
+
+    //    $.ajax({
+    //        url: GetPostUrl,
+    //        data: data,
+    //        type: 'POST',
+    //        success: function (data) {
+    //            alert('success');
+    //            location.reload();
+    //        }
+    //    })
+
+    //    function GetPost(data) {
+    //        //do something
+    //    }
+    //})
 });

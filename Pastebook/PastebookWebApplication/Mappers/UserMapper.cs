@@ -10,6 +10,7 @@ namespace PastebookWebApplication.Mappers
         {
             UserEntity userEntity = new UserEntity()
             {
+                UserId = userModel.UserId,
                 Username = userModel.Username,
                 Salt = userModel.Salt,
                 PasswordHash = userModel.PasswordHash,
@@ -31,6 +32,7 @@ namespace PastebookWebApplication.Mappers
         {
             UserModel userModel = new UserModel()
             {
+                UserId = userEntity.UserId,
                 Username = userEntity.Username,
                 Salt = userEntity.Salt,
                 PasswordHash = userEntity.PasswordHash,

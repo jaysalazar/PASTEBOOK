@@ -38,7 +38,44 @@ namespace PastebookBusinessLogic.BusinessLogic
             return result;
         }
 
-        public PostEntity RetrievePost(int posterId)
+        public List<PostEntity> RetrieveAllPosts(PostEntity postEntity, string postType)
+        {
+            List<PostEntity> postEntityList = new List<PostEntity>();
+            //PostEntity postEntity = new PostEntity();
+
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    if (postType == "timeline")
+                    {
+
+                    }
+                    if (postType == "newsfeed")
+                    {
+
+                    }
+
+
+                    var result = context.PB_POST.ToList();
+
+                    foreach (var post in result)
+                    {
+                        postEntity = PostMapper.MapPostEntityEFToPostEntityUI(post);
+                        postEntityList.Add(postEntity);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return postEntityList;
+        }
+
+        public PostEntity RetrievePost(int postId)
         {
             PostEntity postEntityUI = new PostEntity();
             PB_POST postEntityEF = new PB_POST();
@@ -47,7 +84,7 @@ namespace PastebookBusinessLogic.BusinessLogic
             {
                 try
                 {
-                    postEntityEF = context.PB_POST.Single(x => x.POSTER_ID == posterId);
+                    postEntityEF = context.PB_POST.Single(x => x.ID == postId);
                     postEntityUI = PostMapper.MapPostEntityEFToPostEntityUI(postEntityEF);
                 }
                 catch (Exception ex)

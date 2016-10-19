@@ -21,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PasswordHash, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.PasswordHash, new { htmlAttributes = new { @class = "form-control", type = "password" } })
                 @Html.ValidationMessageFor(model => model.PasswordHash, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", type = "password" } })
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,13 +53,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @* souce: https://agilewarrior.wordpress.com/2012/12/13/how-to-simple-html-dropdownlistfor-mvc-net/*@
                 @Html.DropDownListFor(model => model.Gender, new SelectList(new List<object>()
-               {
-                   new { value = 'm', text = "Male"},
-                   new { value = 'f', text = "Female"},
-                   new { value = 'u', text = "Unspecified"},
-               }, "value", "text", 'm'), new { @class = "form-control" })
+                {
+                    new { value = 'm', text = "Male"},
+                    new { value = 'f', text = "Female"},
+                    new { value = 'u', text = "Unspecified"},
+                }, "value", "text", 'm'), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -109,10 +108,10 @@
 }
 
 @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
     <script>
         var CheckEmailUrl = '@Url.Action("CheckEmail", "User")';
         var CheckUsernameUrl = '@Url.Action("CheckUsername", "User")';
     </script>
-
-    @Scripts.Render("~/bundles/jqueryval")
 }

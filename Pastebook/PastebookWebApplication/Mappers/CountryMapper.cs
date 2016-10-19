@@ -9,7 +9,7 @@ namespace PastebookWebApplication.Mappers
 {
     public class CountryMapper
     {
-        public static CountryModel MapCountryEntityEFToCountryEntityUI(CountryEntity countryEntity)
+        public static CountryModel MapCountryEntityToCountryModel(CountryEntity countryEntity)
         {
             CountryModel countryModel = new CountryModel()
             {

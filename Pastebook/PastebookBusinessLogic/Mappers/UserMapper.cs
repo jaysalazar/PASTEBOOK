@@ -10,6 +10,7 @@ namespace PastebookBusinessLogic.Mappers
         {
             PB_USER userEntityEF = new PB_USER()
             {
+                ID = userEntityUI.UserId,
                 USER_NAME = userEntityUI.Username,
                 SALT = userEntityUI.Salt,
                 PASSWORD = userEntityUI.PasswordHash,
@@ -30,6 +31,7 @@ namespace PastebookBusinessLogic.Mappers
         {
             UserEntity userEntityUI = new UserEntity()
             {
+                UserId = userEntityEF.ID,
                 Username = userEntityEF.USER_NAME,
                 Salt = userEntityEF.SALT,
                 PasswordHash = userEntityEF.PASSWORD,
