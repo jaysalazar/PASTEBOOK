@@ -272,7 +272,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="PASTEBOOK_DBEntities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="PASTEBOOK_DBEntities" annotation:LazyLoadingEnabled="false">
     <EntitySet Name="PB_COMMENT" EntityType="Self.PB_COMMENT" />
     <EntitySet Name="PB_FRIEND" EntityType="Self.PB_FRIEND" />
     <EntitySet Name="PB_LIKE" EntityType="Self.PB_LIKE" />

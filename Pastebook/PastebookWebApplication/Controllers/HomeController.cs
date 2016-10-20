@@ -1,22 +1,19 @@
 ﻿using PastebookWebApplication.Managers;
-using PastebookWebApplication.Mappers;
 using PastebookWebApplication.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PastebookWebApplication.Controllers
 {
     public class HomeController : Controller
     {
-        LogInRegisterManager userManager = new LogInRegisterManager();
-        ProfileManager postManager = new ProfileManager();
+        AccountManager accountManager = new AccountManager();
+        ProfileManager profileManager = new ProfileManager();
 
         //newsfeed
         public ActionResult Index()
         {
+            // if a user is logged in go to home
             if (Session["CurrentUser"] != null)
             {
                 return View();
@@ -25,18 +22,20 @@ namespace PastebookWebApplication.Controllers
             return RedirectToAction("LogIn", "User");
         }
 
-        //profile
         [HttpGet]
         public ActionResult UserProfile(string username)
         {
             if (Session["CurrentUser"] != null)
             {
+                // get email of current user
+                // TODO: try to implement friend profile page
                 string email = (string)Session["CurrentUser"];
                 UserProfileModel profileModel = new UserProfileModel();
 
                 UserModel userModel = new UserModel();
-                userModel = userManager.RetrieveUser(email);
+                userModel = accountManager.RetrieveUser(email);
 
+                // save to profileModel view to get user credentials of current profile page
                 profileModel.User = userModel;
 
                 return View(profileModel);
@@ -44,28 +43,45 @@ namespace PastebookWebApplication.Controllers
 
             return RedirectToAction("LogIn", "User");
         }
-
+        
         [HttpPost]
         public ActionResult Timeline(UserProfileModel profileModel)
         {
-            //string email = (string)Session["CurrentUser"];
-
-            //UserModel userModel = new UserModel();
-            //userModel = manager.RetrieveUser(email);
-
             if (Session["CurrentUser"] != null)
             {
+                // save post on postModel
                 PostModel postModel = new PostModel()
                 {
                     PosterId = profileModel.User.UserId,
+                    // temp POID: current user
+                    // TODO: /{username}
                     ProfileOwnerId = profileModel.User.UserId,
                     Content = profileModel.Post.Content
                 };
 
-                postManager.CreatePost(postModel);
-                //ViewBag.Posts = postManager.RetrieveAllPosts();
+                // save post to DB
+                profileManager.CreatePost(postModel);
 
-                return View(postModel);
+                // retrieve current user email
+                string email = (string)Session["CurrentUser"];
+
+                // save to userModel
+                UserModel userModel = new UserModel();
+                userModel = accountManager.RetrieveUser(email);
+
+                // get list of freinds of current user
+                List<FriendModel> Friends = new List<FriendModel>();
+                Friends = profileManager.RetrieveAllFriends(userModel.UserId);
+
+                // get user and friend posts to be displayed to timeline
+                List<PostModel> Posts = new List<PostModel>();
+
+                foreach (var friend in Friends)
+                {
+                    Posts = profileManager.RetrieveAllPosts(friend);
+                }
+
+                return View(Posts);
             }
 
             return RedirectToAction("LogIn", "User");

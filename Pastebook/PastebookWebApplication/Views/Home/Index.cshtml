@@ -6,18 +6,21 @@
     HOME
     <div class="row">
         <div class="col-md-3">
-
+            @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
         </div>
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-12">@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
-                <div class="col-md-12 pull-right">
+                <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
+                <div>
                     @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
+                </div>
+                <div>
+                    @*partial view of timeline here*@
                 </div>
             </div>
         </div>
         <div class="col-md-2">
-
+            
         </div>
     </div>
 </div>

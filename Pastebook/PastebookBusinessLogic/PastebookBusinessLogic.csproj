@@ -49,20 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\CountryManager.cs" />
-    <Compile Include="BusinessLogic\PostManager.cs" />
-    <Compile Include="BusinessLogic\UserManager.cs" />
-    <Compile Include="BusinessLogic\PasswordManager.cs" />
-    <Compile Include="Entities\CommentEntity.cs" />
-    <Compile Include="Entities\CountryEntity.cs" />
-    <Compile Include="Entities\FriendEntity.cs" />
-    <Compile Include="Entities\LikeEntity.cs" />
-    <Compile Include="Entities\NotificationEntity.cs" />
-    <Compile Include="Entities\PostEntity.cs" />
-    <Compile Include="Entities\UserEntity.cs" />
-    <Compile Include="Mappers\CountryMapper.cs" />
-    <Compile Include="Mappers\PostMapper.cs" />
-    <Compile Include="Mappers\UserMapper.cs" />
+    <Compile Include="Managers\ActionManager.cs" />
+    <Compile Include="Managers\CountryManager.cs" />
+    <Compile Include="Managers\FriendManager.cs" />
+    <Compile Include="Managers\PostManager.cs" />
+    <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Managers\PasswordManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

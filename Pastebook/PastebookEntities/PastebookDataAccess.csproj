@@ -88,6 +88,8 @@
     <Compile Include="REF_COUNTRY.cs">
       <DependentUpon>PastebookDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>PastebookDBModel.tt</DependentUpon>
     </Compile>

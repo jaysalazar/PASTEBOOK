@@ -161,15 +161,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\LogInRegisterManager.cs" />
+    <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Managers\ProfileManager.cs" />
-    <Compile Include="Mappers\CountryMapper.cs" />
-    <Compile Include="Mappers\PostMapper.cs" />
+    <Compile Include="Models\CommentEntity.cs" />
+    <Compile Include="Models\CountryEntity.cs" />
     <Compile Include="Models\CountryModel.cs" />
-    <Compile Include="Models\ListModel.cs" />
+    <Compile Include="Models\FriendEntity.cs" />
+    <Compile Include="Models\FriendModel.cs" />
+    <Compile Include="Models\LikeEntity.cs" />
+    <Compile Include="Models\NotificationEntity.cs" />
+    <Compile Include="Models\PostEntity.cs" />
     <Compile Include="Models\PostModel.cs" />
+    <Compile Include="Models\UserEntity.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Models\UserProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -219,6 +223,7 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home\Timeline.cshtml" />
+    <Content Include="Views\Home\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

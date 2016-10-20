@@ -7,7 +7,7 @@ namespace PastebookWebApplication.Controllers
 {
     public class UserController : Controller
     {
-        LogInRegisterManager manager = new LogInRegisterManager();
+        AccountManager manager = new AccountManager();
 
         // GET: Register
         [HttpGet]
@@ -77,6 +77,7 @@ namespace PastebookWebApplication.Controllers
                     {
                         Session["CurrentUser"] = userModel.EmailAddress;
                         Session["FirstName"] = userModel.FirstName;
+                        Session["Username"] = userModel.Username;
                         return RedirectToAction("Index", "Home");
                     }
                 }

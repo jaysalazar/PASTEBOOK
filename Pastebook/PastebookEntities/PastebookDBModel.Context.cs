@@ -18,6 +18,7 @@ namespace PastebookDataAccess
         public PASTEBOOK_DBEntities()
             : base("name=PASTEBOOK_DBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
