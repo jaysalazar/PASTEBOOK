@@ -21,7 +21,7 @@
                 <div class="navbar-header">
                     @*<div class="navbar-brand">
                         <a href="@Url.Action("Index","Home")">
-                            <img src="~/Content/Images/pastebook-logo.png" alt="Pastebook" class="img-responsive" />
+                            <img src="~/Content/Images/pastebook-icon.png" alt="Pastebook" class="img-responsive" />
                         </a>
                     </div>*@
                     @Html.ActionLink("Pastebook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
@@ -30,7 +30,7 @@
                     <ul class="nav navbar-nav pull-right">
                         <li class="txtSearch"><input type="text" class="form-control txtSearch" placeholder="Search for people you may know..."></li>
                         <li class="btnSearch"><button class="btn btn-default">Search</button></li>
-                        <li>@Html.ActionLink(Session["FirstName"].ToString(), "UserProfile", "Home",
+                        <li>@Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
                                              new { username = Session["Username"].ToString()}, null)</li>
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li class="dropdown">

@@ -156,30 +156,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\AccountManager.cs" />
-    <Compile Include="Managers\ProfileManager.cs" />
-    <Compile Include="Models\CommentEntity.cs" />
-    <Compile Include="Models\CountryEntity.cs" />
-    <Compile Include="Models\CountryModel.cs" />
-    <Compile Include="Models\FriendEntity.cs" />
-    <Compile Include="Models\FriendModel.cs" />
-    <Compile Include="Models\LikeEntity.cs" />
-    <Compile Include="Models\NotificationEntity.cs" />
-    <Compile Include="Models\PostEntity.cs" />
-    <Compile Include="Models\PostModel.cs" />
-    <Compile Include="Models\UserEntity.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\UserProfileModel.cs" />
+    <Compile Include="Models\PastebookModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\default-profile-picture.png" />
     <Content Include="Content\Images\pastebook-icon.png" />
     <Content Include="Content\Images\pastebook-logo.png" />
     <Content Include="favicon.ico" />
@@ -218,15 +209,17 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\User\LogIn.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\Home\UserProfile.cshtml" />
-    <Content Include="Views\Home\Timeline.cshtml" />
-    <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Views\Account\LogIn.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Timeline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Managers\" />
+    <Folder Include="Views\Friend\" />
+    <Folder Include="Views\Post\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -240,6 +233,10 @@
     <ProjectReference Include="..\PastebookBusinessLogic\PastebookBusinessLogic.csproj">
       <Project>{183d2988-8064-4fcd-97be-6824736255b8}</Project>
       <Name>PastebookBusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PastebookEntities\PastebookDataAccess.csproj">
+      <Project>{8DF8F135-215D-46EB-AD20-8EF1540584C3}</Project>
+      <Name>PastebookDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

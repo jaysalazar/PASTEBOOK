@@ -1,18 +1,36 @@
-﻿using PastebookDataAccess;
+﻿using PastebookBusinessLogic.Managers;
+using PastebookDataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PastebookBusinessLogic.BusinessLogic
+namespace PastebookBusinessLogic.Managers
 {
     public class UserManager : Repository<PASTEBOOK_DBEntities, PB_USER>
     {
+        PasswordManager passwordManager = new PasswordManager();
+
         public int CreateUser(PB_USER userEntity)
         {
             int result = 0;
-            
+            string salt = "";
+
+            userEntity.USER_NAME = InputManager.Trim(userEntity.USER_NAME);
+            userEntity.PASSWORD = InputManager.Trim(userEntity.PASSWORD);
+            userEntity.PASSWORD = passwordManager.GeneratePasswordHash(userEntity.PASSWORD, out salt);
+            userEntity.SALT = salt;
+            userEntity.FIRST_NAME = InputManager.Trim(userEntity.FIRST_NAME);
+            //test
+            InputManager.Trim(userEntity.LAST_NAME);
+            userEntity.MOBILE_NO = userEntity.MOBILE_NO.Trim();
             userEntity.DATE_CREATED = DateTime.UtcNow;
             userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToUniversalTime();
+            userEntity.EMAIL_ADDRESS.Trim();
+
+            if (userEntity.ABOUT_ME != null)
+            {
+                userEntity.ABOUT_ME.Trim();
+            }
 
             try
             {
@@ -27,13 +45,34 @@ namespace PastebookBusinessLogic.BusinessLogic
             return result;
         }
 
-        public PB_USER RetrieveUser(string emailAddress)
+        public PB_USER RetrieveUser(string username)
         {
             PB_USER userEntity = new PB_USER();
 
             try
             {
-                userEntity = Retrieve(x => x.EMAIL_ADDRESS == emailAddress).SingleOrDefault();
+                userEntity = Retrieve(x => x.USER_NAME == username).SingleOrDefault();
+                // try
+                userEntity.BIRTHDAY.ToLocalTime();
+                // userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToLocalTime();
+                userEntity.DATE_CREATED = userEntity.DATE_CREATED.ToLocalTime();
+            }
+            catch (Exception ex)
+            {
+                List<Exception> exceptionList = new List<Exception>();
+                exceptionList.Add(ex);
+            }
+
+            return userEntity;
+        }
+
+        public PB_USER RetrieveUserByEmail(string email)
+        {
+            PB_USER userEntity = new PB_USER();
+
+            try
+            {
+                userEntity = Retrieve(x => x.EMAIL_ADDRESS == email).SingleOrDefault();
                 // try
                 userEntity.BIRTHDAY.ToLocalTime();
                 // userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToLocalTime();

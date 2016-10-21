@@ -23,19 +23,7 @@ namespace PastebookDataAccess
         {
             IQueryable<T> result = null;
 
-            try
-            {
-                result = _context.Set<T>();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
-            }
+            result = _context.Set<T>();
 
             return result;
         }
@@ -44,87 +32,44 @@ namespace PastebookDataAccess
         {
             IQueryable<T> result = null;
 
-            try
-            {
-                result = _context.Set<T>().Where(predicate);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
-            }
+            result = _context.Set<T>().Where(predicate);
 
             return result;
         }
 
-        public virtual int Add(T entity)
+        public int Add(T entity)
         {
             int result = 0;
 
-            try
-            {
-                _context.Set<T>().Add(entity);
-                result = _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
-            }
+            _context.Set<T>().Add(entity);
+            result = Save();
 
             return result;
         }
 
-        public virtual int Edit(T entity)
+        public int Edit(T entity)
         {
             int result = 0;
 
-            try
-            {
-                _context.Entry(entity).State = EntityState.Modified;
-                result = _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
-            }
+            _context.Entry(entity).State = EntityState.Modified;
+            result = Save();
 
             return result;
         }
 
-        public virtual int Delete(T entity)
+        public int Delete(T entity)
         {
             int result = 0;
 
-            try
-            {
-                _context.Set<T>().Remove(entity);
-                result = _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
-            }
+            _context.Set<T>().Remove(entity);
+            result = Save();
 
             return result;
+        }
+
+        public int Save()
+        {
+            return _context.SaveChanges();
         }
     }
 }

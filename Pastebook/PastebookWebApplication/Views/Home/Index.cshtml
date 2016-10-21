@@ -1,30 +1,36 @@
-﻿@{
-    ViewBag.Title = "Pastebook";
-}
+﻿@model PastebookWebApplication.Models.PastebookModel
 
-<div class="container">
-    HOME
-    <div class="row">
-        <div class="col-md-3">
-            @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
-                <div>
-                    @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
+    @{
+        ViewBag.Title = "Pastebook";
+    }
+
+    <div class="container">
+        HOME
+        <div class="row">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    @Html.ActionLink(@Model.User.FIRST_NAME + " " + @Model.User.LAST_NAME, "Index", new { username = Model.User.USER_NAME }, null)
                 </div>
-                <div>
-                    @*partial view of timeline here*@
+
+                @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
+                    <div>
+                        @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
+                    </div>
+                    <div>
+                        @*partial view of timeline here*@
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2">
-            
+            <div class="col-md-2">
+
+            </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

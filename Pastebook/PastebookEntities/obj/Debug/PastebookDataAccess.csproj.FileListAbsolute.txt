@@ -5,6 +5,5 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Deb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookDataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookDataAccess.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookDataAccess.pdb

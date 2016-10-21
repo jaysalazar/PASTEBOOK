@@ -1,0 +1,39 @@
+﻿@model PastebookWebApplication.Models.PastebookModel
+
+@{
+    ViewBag.Title = Model.User.FIRST_NAME + " " + Model.User.LAST_NAME;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Pic" class="img-circle" />
+            </div>
+            <div class="col-md-12"><a >@Model.User.FIRST_NAME @Model.User.LAST_NAME</a></div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div>
+                    @Html.TextAreaFor(model => model.Post.CONTENT, new { @class = "form-control", id = "txtContent", placeholder = "Write something..." })
+                    @Html.HiddenFor(model => model.User.ID)
+                </div>
+                <div>
+                    @*click post > save username*@
+                    @Html.ActionLink("Post", "Timeline", "Home" @*,new { username = Model.User.USER_NAME}*@, new { @class = "btn btn-default", id = "btnPost" })
+                </div>
+                @Html.Partial("Timeline");
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var GetPostUrl = '@Url.Action("GetPost", "Home")';
+        var ProfileOwner = @Model.User.ID;
+    </script>
+}

@@ -1,14 +1,11 @@
 ﻿$(document).ready(function () {
 
     $('#btnRegister').click(function () {
+
         var data = {
             email: '#txtEmailAddress',
             username: '#txtUsername'
         }
-
-        //test
-        var text = $('.form-control').val();
-        $.trim(text);
 
         $.ajax({
             url: CheckEmailUrl,
@@ -30,34 +27,34 @@
 
         function CheckEmail(data) {
             if (data.Result == true) {
-                $('#msgEmailAddress').show();
+                $('#spnEmailAddress').show();
             }
         }
 
         function CheckUsername(data) {
             if (data.Result == true) {
-                $('#msgUsername').show();
+                $('#spnUsername').show();
             }
         }
     })
 
-    //$('#btnPost').click(function () {
-    //    var data = {
-    //        content: '#txtContent'
-    //    }
+    $('#btnPost').click(function () {
+        var data = {
+            content: '#txtContent'
+        }
 
-    //    $.ajax({
-    //        url: GetPostUrl,
-    //        data: data,
-    //        type: 'POST',
-    //        success: function (data) {
-    //            alert('success');
-    //            location.reload();
-    //        }
-    //    })
+        $.ajax({
+            url: GetPostUrl,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                alert('success');
+                location.reload();
+            }
+        })
 
-    //    function GetPost(data) {
-    //        //do something
-    //    }
-    //})
+        function GetPost(data) {
+            //do something
+        }
+    })
 });

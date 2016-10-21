@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PastebookBusinessLogic.BusinessLogic
+namespace PastebookBusinessLogic.Managers
 {
     public class CountryManager : Repository<PASTEBOOK_DBEntities, REF_COUNTRY>
     {

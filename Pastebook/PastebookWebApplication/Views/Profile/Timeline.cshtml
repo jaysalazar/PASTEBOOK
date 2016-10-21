@@ -1,0 +1,24 @@
+﻿@model IEnumerable<PastebookWebApplication.Models.PastebookModel>
+
+TIMELINE
+<table class="table">
+    <tr>
+        <th>PostId</th>
+        <th>Content</th>
+        <th>CreatedDate</th>
+        <th>PosterId</th>
+        <th>ProfileOwnerId</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Post.ID</td>
+            <td>@item.Post.CONTENT</td>
+            <td>@item.Post.CREATED_DATE</td>
+            <td>@item.Post.POSTER_ID</td>
+            <td>@item.Post.PROFILE_OWNER_ID</td>
+        </tr>
+    }
+
+</table>

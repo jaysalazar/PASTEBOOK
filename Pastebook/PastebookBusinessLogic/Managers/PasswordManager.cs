@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace PastebookBusinessLogic.BusinessLogic
+namespace PastebookBusinessLogic.Managers
 {
     // source: http://www.codeproject.com/Articles/608860/Understanding-and-Implementing-Password-Hashing
     public class PasswordManager

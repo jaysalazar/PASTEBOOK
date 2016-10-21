@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace PastebookBusinessLogic.BusinessLogic
+namespace PastebookBusinessLogic.Managers
 {
     public class FriendManager : Repository<PASTEBOOK_DBEntities, PB_FRIEND>
     {

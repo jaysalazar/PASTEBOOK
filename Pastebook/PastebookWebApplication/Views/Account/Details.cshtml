@@ -1,0 +1,41 @@
+﻿@model PastebookWebApplication.Models.PastebookModel
+
+@{
+    ViewBag.Title = "Pastebook";
+}
+
+<div>
+    <h4>DETAILS</h4>
+    <hr />
+            @Html.DisplayNameFor(model => model.User.USER_NAME)
+
+            @Html.DisplayFor(model => model.User.USER_NAME)
+   
+            @Html.DisplayNameFor(model => model.User.FIRST_NAME)
+       
+            @Html.DisplayFor(model => model.User.FIRST_NAME)
+       
+            @Html.DisplayNameFor(model => model.User.LAST_NAME)
+       
+            @Html.DisplayFor(model => model.User.LAST_NAME)
+       
+            @Html.DisplayNameFor(model => model.User.GENDER)
+       
+            @Html.DisplayFor(model => model.User.GENDER)
+       
+            @Html.DisplayNameFor(model => model.User.EMAIL_ADDRESS)
+        
+            @Html.DisplayFor(model => model.User.EMAIL_ADDRESS)
+       
+            @Html.DisplayNameFor(model => model.User.BIRTHDAY)
+        
+            @Html.DisplayFor(model => model.User.BIRTHDAY)
+        
+            @Html.DisplayNameFor(model => model.User.COUNTRY_ID)
+       
+            @Html.DisplayFor(model => model.User.COUNTRY_ID)
+        
+            @Html.DisplayNameFor(model => model.User.MOBILE_NO)
+        
+            @Html.DisplayFor(model => model.User.MOBILE_NO)
+</div>

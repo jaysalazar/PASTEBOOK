@@ -9,12 +9,12 @@ namespace PastebookWebApplication
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //site/username
-            //routes.MapRoute(
-            //   name: "Pastebook",
-            //   url: "/{id}",
-            //   defaults: new { controller = "Pastebook", action = "LogIn", id = UrlParameter.Optional }
-            //);
+            // source: http://stackoverflow.com/questions/21337823/change-route-url-in-asp-net-mvc
+            routes.MapRoute(
+                name: "Profile",
+                url: "/{id}",
+                defaults: new { controller = "Profile", action = "Index", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
