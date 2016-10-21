@@ -9,6 +9,7 @@ namespace PastebookWebApplication.Models
         public int ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+
         [DisplayName("Confirm Password")]
         [Compare("Password", ErrorMessage = "{0} does not match.")]
         public string ConfirmPassword { get; set; }

@@ -32,7 +32,7 @@ namespace PastebookBusinessLogic.Managers
 
             try
             {
-                var result = Retrieve(x => x.USER_ID == userId);
+                var result = Retrieve(x => x.REQUEST == "N" && (x.USER_ID == userId || x.FRIEND_ID == userId));
 
                 foreach (var friend in result)
                 {

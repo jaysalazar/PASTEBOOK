@@ -58,12 +58,23 @@ namespace PastebookBusinessLogic.Managers
         {
             List<PB_POST> posts = new List<PB_POST>();
             PB_POST postEntity = new PB_POST();
+            FriendManager friendManager = new FriendManager();
 
             try
             {
                 // newsfeed: retrieves all posts of user and friends of user
-                var result = Retrieve(x => x.POSTER_ID == friendEntity.USER_ID || x.POSTER_ID == friendEntity.FRIEND_ID)
+                var newsFeedResult = Retrieve(x => x.POSTER_ID == friendEntity.USER_ID ||
+                                           x.POSTER_ID == friendEntity.FRIEND_ID ||
+                                           x.PROFILE_OWNER_ID == friendEntity.FRIEND_ID)
                             .OrderByDescending(x => x.CREATED_DATE).Take(100).ToList();
+
+                PB_USER userEntity = new PB_USER();
+
+                userEntity.ID = friendEntity.USER_ID;
+
+                //todo: remove common posts by distinct (but distinct not working)
+                var result = RetrievePostToTimeline(userEntity).Distinct().Union(newsFeedResult);
+
 
                 foreach (var post in result)
                 {

@@ -18,7 +18,7 @@
             <div class="row">
                 <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
                 <div>
-                    @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
+                    @Html.ActionLink("Post", "Newsfeed", "Home", new { @class = "btn btn-default", id = "btnPost" })
                 </div>
                 <div>
                     @{ Html.RenderAction("NewsFeed", "Home", new { id = Model.UserEntity.ID }); }

@@ -14,17 +14,14 @@ namespace PastebookWebApplication.Controllers
             // if a user is logged in go to home
             if (Session["CurrentUser"] != null)
             {
-                // retrieve current user
-                string username = (string)Session["CurrentUser"];
-
-                // save to userModel
-                PB_USER userModel = new PB_USER();
                 UserManager userManager = new UserManager();
-
-                userModel = userManager.RetrieveUser(username);
-
+                PB_USER userModel = new PB_USER();
                 PastebookModel model = new PastebookModel();
 
+                // retrieve current user
+                string username = (string)Session["CurrentUser"];
+                userModel = userManager.RetrieveUser(username);
+                // save to userModel
                 model.UserEntity = userModel;
 
                 return View(model);
@@ -35,15 +32,18 @@ namespace PastebookWebApplication.Controllers
 
         public ActionResult NewsFeed(int id)
         {
-            List<PB_POST> posts = new List<PB_POST>();
+
             PostManager postManager = new PostManager();
+            FriendManager friendManager = new FriendManager();
+            List<PB_POST> posts = new List<PB_POST>();
+            List<PB_FRIEND> friends = new List<PB_FRIEND>();
 
-            PB_FRIEND friendModel = new PB_FRIEND
+            friends = friendManager.RetrieveAllFriends(id);
+
+            foreach (var friend in friends)
             {
-                USER_ID = id
-            };
-
-            posts = postManager.RetrievePostToNewsFeed(friendModel);
+                posts = postManager.RetrievePostToNewsFeed(friend);
+            }
 
             return PartialView(posts);
         }

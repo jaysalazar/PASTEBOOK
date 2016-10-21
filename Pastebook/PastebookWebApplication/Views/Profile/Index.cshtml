@@ -22,7 +22,7 @@
                     @*click post > save username*@
                     @Html.ActionLink("Post", "Timeline", "Profile" @*,new { username = Model.User.USER_NAME}*@, new { @class = "btn btn-default", id = "btnPost" })
                 </div>
-                @*@Html.RenderPartial("Timeline", new { model = Model});*@
+                @{ Html.RenderAction("NewsFeed", "Home", new { id = Model.UserEntity.ID }); }
             </div>
         </div>
         <div class="col-md-2"></div>
