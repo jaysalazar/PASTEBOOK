@@ -19,7 +19,7 @@ namespace PastebookDataAccess
             set { _context = value; }
         }
 
-        public IQueryable<T> RetrieveAll()
+        public IQueryable<T> Retrieve()
         {
             IQueryable<T> result = null;
 

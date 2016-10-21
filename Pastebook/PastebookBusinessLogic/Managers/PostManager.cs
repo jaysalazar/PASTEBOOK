@@ -21,28 +21,22 @@ namespace PastebookBusinessLogic.BusinessLogic
             {
                 List<Exception> exceptionList = new List<Exception>();
                 exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
             }
 
             return result;
         }
 
-        public List<PB_POST> RetrieveAllPosts(PB_FRIEND friendEntity)
+        // todo: try to view timeline of a friend from the current user acct
+        public List<PB_POST> RetrievePostToTimeline(PB_USER userEntity)
         {
             List<PB_POST> posts = new List<PB_POST>();
             PB_POST postEntity = new PB_POST();
 
             try
             {
-                // timeline = current user profile_owner_id
-                // newsfeed = timeline || (friend poster_Id && user poster_Id)
-                var result = Retrieve(x => x.PROFILE_OWNER_ID == friendEntity.USER_ID)
+                // timeline: retrieves all posts of user and friends who posts to user's profile
+                var result = Retrieve(x => x.PROFILE_OWNER_ID == userEntity.ID)
                             .OrderByDescending(x => x.CREATED_DATE).Take(100).ToList();
-                //(x.POSTER_ID == friendEntity.FriendId || //edit
-                // x.POSTER_ID == friendEntity.UserId))
 
                 foreach (var post in result)
                 {
@@ -54,10 +48,32 @@ namespace PastebookBusinessLogic.BusinessLogic
             {
                 List<Exception> exceptionList = new List<Exception>();
                 exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
+            }
+
+            return posts;
+        }
+
+        public List<PB_POST> RetrievePostToNewsFeed(PB_FRIEND friendEntity)
+        {
+            List<PB_POST> posts = new List<PB_POST>();
+            PB_POST postEntity = new PB_POST();
+
+            try
+            {
+                // newsfeed: retrieves all posts of user and friends of user
+                var result = Retrieve(x => x.POSTER_ID == friendEntity.USER_ID || x.POSTER_ID == friendEntity.FRIEND_ID)
+                            .OrderByDescending(x => x.CREATED_DATE).Take(100).ToList();
+
+                foreach (var post in result)
                 {
-                    throw new Exception(exception.Message, ex);
+                    post.CREATED_DATE = post.CREATED_DATE.ToLocalTime();
+                    posts.Add(post);
                 }
+            }
+            catch (Exception ex)
+            {
+                List<Exception> exceptionList = new List<Exception>();
+                exceptionList.Add(ex);
             }
 
             return posts;
@@ -70,15 +86,12 @@ namespace PastebookBusinessLogic.BusinessLogic
             try
             {
                 postEntity = Retrieve(x => x.ID == postId).Single();
+                postEntity.CREATED_DATE = postEntity.CREATED_DATE.ToLocalTime();
             }
             catch (Exception ex)
             {
                 List<Exception> exceptionList = new List<Exception>();
                 exceptionList.Add(ex);
-                foreach (var exception in exceptionList)
-                {
-                    throw new Exception(exception.Message, ex);
-                }
             }
 
             return postEntity;

@@ -1,66 +1,51 @@
-﻿using PastebookBusinessLogic.Entities;
-using PastebookBusinessLogic.Mappers;
-using PastebookDataAccess;
+﻿using PastebookDataAccess;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PastebookBusinessLogic.BusinessLogic
 {
-    public class FriendManager
+    public class FriendManager : Repository<PASTEBOOK_DBEntities, PB_FRIEND>
     {
-        List<Exception> exceptionList;
-
-        public int AddFriend(FriendEntity friendEntity)
+        public int AddFriend(PB_FRIEND friendEntity)
         {
             int result = 0;
-            PB_FRIEND friendEntityEF = new PB_FRIEND();
 
-            friendEntityEF = FriendMapper.MapFriendEntityUIToFriendEntityEF(friendEntity);
-            friendEntityEF.CREATED_DATE = DateTime.UtcNow;
+            friendEntity.CREATED_DATE = DateTime.UtcNow;
 
-            using (var context = new PASTEBOOK_DBEntities())
+            try
             {
-                try
-                {
-                    context.PB_FRIEND.Add(friendEntityEF);
-                    result = context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    exceptionList = new List<Exception>();
-                    exceptionList.Add(ex);
-                }
+                result = Add(friendEntity);
+            }
+            catch (Exception ex)
+            {
+                List<Exception> exceptionList = new List<Exception>();
+                exceptionList.Add(ex);
             }
 
             return result;
         }
-
-        public List<FriendEntity> RetrieveAllFriends(int userId)
+        
+        public List<PB_FRIEND> RetrieveAllFriends(int userId)
         {
-            List<FriendEntity> friendEntityList = new List<FriendEntity>();
-            FriendEntity friendEntity = new FriendEntity();
+            List<PB_FRIEND> friends = new List<PB_FRIEND>();
 
-            using (var context = new PASTEBOOK_DBEntities())
+            try
             {
-                try
-                {
-                    var result = context.PB_FRIEND.Where(x => x.USER_ID == userId).ToList();
+                var result = Retrieve(x => x.USER_ID == userId);
 
-                    foreach (var friend in result)
-                    {
-                        friendEntity = FriendMapper.MapFriendEntityEFToFriendEntityUI(friend);
-                        friendEntityList.Add(friendEntity);
-                    }
-                }
-                catch (Exception ex)
+                foreach (var friend in result)
                 {
-                    exceptionList = new List<Exception>();
-                    exceptionList.Add(ex);
+                    friend.CREATED_DATE = friend.CREATED_DATE.ToLocalTime();
+                    friends.Add(friend);
                 }
             }
+            catch (Exception ex)
+            {
+                List<Exception> exceptionList = new List<Exception>();
+                exceptionList.Add(ex);
+            }
 
-            return friendEntityList;
+            return friends;
         }
     }
 }

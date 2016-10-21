@@ -1,41 +1,32 @@
-﻿using PastebookBusinessLogic.Entities;
-using PastebookBusinessLogic.Mappers;
-using PastebookDataAccess;
+﻿using PastebookDataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PastebookBusinessLogic.BusinessLogic
 {
-    public class CountryManager
+    public class CountryManager : Repository<PASTEBOOK_DBEntities, REF_COUNTRY>
     {
-        List<Exception> exceptionList;
-
-        public List<CountryEntity> RetrieveAllCountries()
+        public List<REF_COUNTRY> RetrieveAllCountries()
         {
-            List<CountryEntity> countryEntityList = new List<CountryEntity>();
-            CountryEntity countryEntity = new CountryEntity();
+            List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
 
-            using (var context = new PASTEBOOK_DBEntities())
+            try
             {
-                try
-                {
-                    var result = context.REF_COUNTRY.ToList();
+                var result = Retrieve();
 
-                    foreach (var country in result)
-                    {
-                        countryEntity = CountryMapper.MapCountryEntityEFToCountryEntityUI(country);
-                        countryEntityList.Add(countryEntity);
-                    }
-                }
-                catch (Exception ex)
+                foreach (var country in result)
                 {
-                    exceptionList = new List<Exception>();
-                    exceptionList.Add(ex);
+                    countries.Add(country);
                 }
             }
+            catch (Exception ex)
+            {
+                List<Exception> exceptionList = new List<Exception>();
+                exceptionList.Add(ex);
+            }
 
-            return countryEntityList;
+            return countries;
         }
-    }
+}
 }

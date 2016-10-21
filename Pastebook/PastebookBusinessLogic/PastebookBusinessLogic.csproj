@@ -49,9 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Managers\ActionManager.cs" />
+    <Compile Include="Managers\CommentManager.cs" />
+    <Compile Include="Managers\LikeManager.cs" />
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\FriendManager.cs" />
+    <Compile Include="Managers\NotificationManager.cs" />
     <Compile Include="Managers\PostManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\PasswordManager.cs" />
