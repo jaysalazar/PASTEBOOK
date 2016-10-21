@@ -1,4 +1,5 @@
 ﻿using PastebookDataAccess;
+using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PastebookBusinessLogic.Managers
 {
-    public class NotificationManager : Repository<PASTEBOOK_DBEntities, PB_NOTIFICATION>
+    public class NotificationManager : Repository<PB_NOTIFICATION>
     {
         public int AddNotification(PB_NOTIFICATION notificationEntity)
         {

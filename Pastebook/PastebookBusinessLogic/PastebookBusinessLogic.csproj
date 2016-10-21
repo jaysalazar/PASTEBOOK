@@ -59,15 +59,16 @@
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\PasswordManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PastebookEntities\PastebookDataAccess.csproj">
+    <ProjectReference Include="..\PastebookEntities\PastebookEntityFramework.csproj">
       <Project>{8df8f135-215d-46eb-ad20-8ef1540584c3}</Project>
-      <Name>PastebookDataAccess</Name>
+      <Name>PastebookEntityFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,10 @@
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookEntityFramework.dll.config
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookEntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\PastebookEntityFramework.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.xml
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookEntityFramework.csprojResolveAssemblyReference.cache
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookEntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookEntities\obj\Debug\PastebookEntityFramework.pdb

@@ -7,8 +7,8 @@
     <ProjectGuid>{8DF8F135-215D-46EB-AD20-8EF1540584C3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PastebookDataAccess</RootNamespace>
-    <AssemblyName>PastebookDataAccess</AssemblyName>
+    <RootNamespace>PastebookEntityFramework</RootNamespace>
+    <AssemblyName>PastebookEntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -88,8 +88,6 @@
     <Compile Include="REF_COUNTRY.cs">
       <DependentUpon>PastebookDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Repository\Repository.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>PastebookDBModel.tt</DependentUpon>
     </Compile>

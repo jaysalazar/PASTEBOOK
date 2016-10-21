@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PastebookEntityFramework.PB_POST>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CREATED_DATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONTENT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PROFILE_OWNER_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POSTER_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREATED_DATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONTENT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PROFILE_OWNER_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POSTER_ID)
+        </td>
+    </tr>
+}
+
+</table>

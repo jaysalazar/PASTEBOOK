@@ -13,11 +13,11 @@ TIMELINE
     @foreach (var item in Model)
     {
         <tr>
-            <td>@item.Post.ID</td>
-            <td>@item.Post.CONTENT</td>
-            <td>@item.Post.CREATED_DATE</td>
-            <td>@item.Post.POSTER_ID</td>
-            <td>@item.Post.PROFILE_OWNER_ID</td>
+            <td>@item.PostEntity.ID</td>
+            <td>@item.PostEntity.CONTENT</td>
+            <td>@item.PostEntity.CREATED_DATE</td>
+            <td>@item.PostEntity.POSTER_ID</td>
+            <td>@item.PostEntity.PROFILE_OWNER_ID</td>
         </tr>
     }
 

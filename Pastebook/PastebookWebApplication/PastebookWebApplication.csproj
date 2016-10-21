@@ -164,7 +164,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\PastebookModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +216,7 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Timeline.cshtml" />
+    <Content Include="Views\Home\NewsFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,9 +237,9 @@
       <Project>{183d2988-8064-4fcd-97be-6824736255b8}</Project>
       <Name>PastebookBusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PastebookEntities\PastebookDataAccess.csproj">
+    <ProjectReference Include="..\PastebookEntities\PastebookEntityFramework.csproj">
       <Project>{8DF8F135-215D-46EB-AD20-8EF1540584C3}</Project>
-      <Name>PastebookDataAccess</Name>
+      <Name>PastebookEntityFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

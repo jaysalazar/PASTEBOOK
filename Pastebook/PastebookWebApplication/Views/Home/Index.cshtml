@@ -1,36 +1,33 @@
 ﻿@model PastebookWebApplication.Models.PastebookModel
 
-    @{
-        ViewBag.Title = "Pastebook";
-    }
+@{
+    ViewBag.Title = "Pastebook";
+}
 
-    <div class="container">
-        HOME
-        <div class="row">
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    @Html.ActionLink(@Model.User.FIRST_NAME + " " + @Model.User.LAST_NAME, "Index", new { username = Model.User.USER_NAME }, null)
-                </div>
-
-                @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
+<div class="container">
+    HOME
+    <div class="row">
+        <div class="col-md-3">
+            <div class="col-md-12">
+                @Html.ActionLink(@Model.UserEntity.FIRST_NAME + " " + @Model.UserEntity.LAST_NAME, "Index", new { username = Model.UserEntity.USER_NAME }, null)
             </div>
-            <div class="col-md-8">
-                <div class="row">
-                    <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
-                    <div>
-                        @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
-                    </div>
-                    <div>
-                        @*partial view of timeline here*@
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
 
+            @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
+        </div>
+        <div class="col-md-10 col-md-offset-2">
+            <div class="row">
+                <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
+                <div>
+                    @Html.ActionLink("Post", "Index", "Home", new { @class = "btn btn-default", id = "btnPost" })
+                </div>
+                <div>
+                    @{ Html.RenderAction("NewsFeed", "Home", new { id = Model.UserEntity.ID }); }
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

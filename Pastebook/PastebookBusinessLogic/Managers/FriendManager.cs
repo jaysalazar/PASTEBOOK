@@ -1,10 +1,11 @@
 ﻿using PastebookDataAccess;
+using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
 
 namespace PastebookBusinessLogic.Managers
 {
-    public class FriendManager : Repository<PASTEBOOK_DBEntities, PB_FRIEND>
+    public class FriendManager : Repository<PB_FRIEND>
     {
         public int AddFriend(PB_FRIEND friendEntity)
         {

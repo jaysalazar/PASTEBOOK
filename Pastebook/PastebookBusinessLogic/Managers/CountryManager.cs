@@ -1,11 +1,12 @@
 ﻿using PastebookDataAccess;
+using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PastebookBusinessLogic.Managers
 {
-    public class CountryManager : Repository<PASTEBOOK_DBEntities, REF_COUNTRY>
+    public class CountryManager : Repository<REF_COUNTRY>
     {
         public List<REF_COUNTRY> RetrieveAllCountries()
         {

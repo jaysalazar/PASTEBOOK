@@ -1,5 +1,7 @@
 ﻿using PastebookBusinessLogic.Managers;
 using PastebookDataAccess;
+using PastebookEntityFramework;
+using PastebookWebApplication.Models;
 using System.Web.Mvc;
 
 namespace PastebookWebApplication.Controllers
@@ -62,34 +64,33 @@ namespace PastebookWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string emailAddress, string password)
+        public ActionResult LogIn(LogInModel model)
         {
-            if (userManager.CheckEmailAddress(emailAddress))
+            if (userManager.CheckEmailAddress(model.Email))
             {
                 PB_USER userModel = new PB_USER();
 
-                userModel = userManager.RetrieveUserByEmail(emailAddress);
+                userModel = userManager.RetrieveUserByEmail(model.Email);
 
-                bool result = userManager.CheckPassword(password, userModel.SALT, userModel.PASSWORD);
+                bool result = userManager.CheckPassword(model.Password, userModel.SALT, userModel.PASSWORD);
 
                 if (result)
                 {
                     if (ModelState.IsValid)
                     {
-                        Session["CurrentUser"] = userModel.EMAIL_ADDRESS;
+                        Session["CurrentUser"] = userModel.USER_NAME;
                         Session["FirstName"] = userModel.FIRST_NAME;
-                        Session["Username"] = userModel.USER_NAME;
                         return RedirectToAction("Index", "Home");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("PasswordHash", "Incorrect Password.");
+                    ModelState.AddModelError("User.PASSWORD", "Incorrect Password.");
                 }
             }
             else
             {
-                ModelState.AddModelError("EmailAddress", "Email doesn't match any account.");
+                ModelState.AddModelError("User.EMAIL_ADDRESS", "Email doesn't match any account.");
             }
 
             return View("LogIn");
@@ -113,5 +114,11 @@ namespace PastebookWebApplication.Controllers
             bool result = userManager.CheckUsername(username);
             return Json(new { Result = result });
         }
+
+        //public JsonResult ConfirmPassword(string password)
+        //{
+        //    bool result = userManager.CheckPassword(password);
+        //    return Json(new { Result = result });
+        //}
     }
 }

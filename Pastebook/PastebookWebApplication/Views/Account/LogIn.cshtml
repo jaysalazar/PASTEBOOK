@@ -1,35 +1,35 @@
-﻿@model PastebookWebApplication.Models.PastebookModel
+﻿@model PastebookWebApplication.Models.LogInModel
 
 @{
     ViewBag.Title = "Pastebook";
 }
 
-@using (Html.BeginForm("Index", "Account", FormMethod.Post))
+@using (Html.BeginForm("LogIn", "Account", FormMethod.Post))
 {
     <div class="form-horizontal">
         <h4>LogInModel</h4>
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User.EMAIL_ADDRESS, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.User.EMAIL_ADDRESS, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.EMAIL_ADDRESS, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.User.PASSWORD, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.User.PASSWORD, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Login" class="btn btn-default" id="btnLogIn" />
-                @Html.ActionLink("Register", "Register", "User", new { @class = "btn btn-default" })
+                @Html.ActionLink("Register", "Register", "Account", new { @class = "btn btn-default" })
             </div>
         </div>
     </div>

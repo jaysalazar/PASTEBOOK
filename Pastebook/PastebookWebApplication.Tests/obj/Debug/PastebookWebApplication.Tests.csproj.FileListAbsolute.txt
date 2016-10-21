@@ -25,7 +25,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.T
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.WebPages.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.Optimization.dll
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookDataAccess.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookEntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookBusinessLogic.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\EntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookWebApplication.pdb
@@ -37,7 +37,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.T
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\System.Web.Optimization.xml
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookDataAccess.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookEntityFramework.pdb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\PastebookBusinessLogic.pdb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\bin\Debug\EntityFramework.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication.Tests\obj\Debug\PastebookWebApplication.Tests.csprojResolveAssemblyReference.cache

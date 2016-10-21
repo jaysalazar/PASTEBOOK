@@ -4,7 +4,13 @@
 
         var data = {
             email: '#txtEmailAddress',
-            username: '#txtUsername'
+            username: '#txtUsername',
+            password: '#txtPassword',
+            confirmPassword: '#txtConfirmPassword'
+        }
+
+        if (data.password === data.confirmPassword) {
+            $('#spnConfirmPassword').show();
         }
 
         $.ajax({

@@ -31,7 +31,7 @@
                         <li class="txtSearch"><input type="text" class="form-control txtSearch" placeholder="Search for people you may know..."></li>
                         <li class="btnSearch"><button class="btn btn-default">Search</button></li>
                         <li>@Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
-                                             new { username = Session["Username"].ToString()}, null)</li>
+                                             new { username = Session["CurrentUser"].ToString()}, null)</li>
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -58,7 +58,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Settings", "Index", "Home")</li>
-                                <li>@Html.ActionLink("Logout", "LogOut", "User")</li>
+                                <li>@Html.ActionLink("Logout", "LogOut", "Account")</li>
                             </ul>
                         </li>
                     </ul>

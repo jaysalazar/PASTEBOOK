@@ -1,5 +1,5 @@
 ﻿using PastebookBusinessLogic.Managers;
-using PastebookDataAccess;
+using PastebookEntityFramework;
 using PastebookWebApplication.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -22,16 +22,16 @@ namespace PastebookWebApplication.Controllers
                 // get any profile of any user using username and save as profile owner id
 
                 // saved current user for the mean time
-                string email = (string)Session["CurrentUser"];
+                string username1 = (string)Session["CurrentUser"];
 
                 PastebookModel profileModel = new PastebookModel();
 
                 PB_USER userModel = new PB_USER();
 
-                userModel = userManager.RetrieveUser(email);
+                userModel = userManager.RetrieveUser(username1);
 
                 // save user creds to profileModel view to provide info for profile
-                profileModel.User = userModel;
+                profileModel.UserEntity = userModel;
 
                 return View(profileModel);
             }
@@ -47,11 +47,11 @@ namespace PastebookWebApplication.Controllers
                 // save post on postModel
                 PB_POST postModel = new PB_POST()
                 {
-                    POSTER_ID = profileModel.User.ID,
+                    POSTER_ID = profileModel.UserEntity.ID,
                     // temp POID: current user
                     // TODO: /{username}
-                    PROFILE_OWNER_ID = profileModel.User.ID,
-                    CONTENT = profileModel.Post.CONTENT
+                    PROFILE_OWNER_ID = profileModel.UserEntity.ID,
+                    CONTENT = profileModel.PostEntity.CONTENT
                 };
 
                 // save post to DB
@@ -60,11 +60,11 @@ namespace PastebookWebApplication.Controllers
                 postManager.CreatePost(postModel);
 
                 // retrieve current user email
-                string email = (string)Session["CurrentUser"];
+                string username = (string)Session["CurrentUser"];
 
                 // save to userModel
                 PB_USER userModel = new PB_USER();
-                userModel = userManager.RetrieveUser(email);
+                userModel = userManager.RetrieveUser(username);
 
                 List<PB_POST> posts = new List<PB_POST>();
 

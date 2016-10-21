@@ -7,11 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PastebookDataAccess
+namespace PastebookEntityFramework
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PB_USER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,7 +34,7 @@ namespace PastebookDataAccess
         public string PASSWORD { get; set; }
         public string SALT { get; set; }
         public string FIRST_NAME { get; set; }
-        public string LAST_NAME { get; set; }
+        public string LAST_NAME { get; set; } 
         public System.DateTime BIRTHDAY { get; set; }
         public Nullable<int> COUNTRY_ID { get; set; }
         public string MOBILE_NO { get; set; }

@@ -1,15 +1,15 @@
-﻿using PastebookDataAccess;
-using System.Collections.Generic;
+﻿using PastebookEntityFramework;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PastebookWebApplication.Models
 {
     public class PastebookModel
     {
-        public PB_USER User { get; set; }
+        public LogInModel User { get; set; }
 
-        public string ConfirmPassword { get; set; }
-
-        public PB_POST Post { get; set; }
+        public PB_USER UserEntity { get; set; }
+        public PB_POST PostEntity { get; set; }
         
     }
 }

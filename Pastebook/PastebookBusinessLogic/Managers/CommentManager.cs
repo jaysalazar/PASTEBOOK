@@ -1,10 +1,11 @@
 ﻿using PastebookDataAccess;
+using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
 
 namespace PastebookBusinessLogic.Managers
 {
-    public class CommentManager : Repository<PASTEBOOK_DBEntities, PB_COMMENT>
+    public class CommentManager : Repository<PB_COMMENT>
     {
         public int AddComment(PB_COMMENT commentEntity)
         {

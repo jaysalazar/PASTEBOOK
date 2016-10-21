@@ -1,11 +1,12 @@
 ﻿using PastebookDataAccess;
+using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace PastebookBusinessLogic.Managers
 {
-    public class PostManager : Repository<PASTEBOOK_DBEntities, PB_POST>
+    public class PostManager : Repository<PB_POST>
     {
         public int CreatePost(PB_POST postEntity)
         {

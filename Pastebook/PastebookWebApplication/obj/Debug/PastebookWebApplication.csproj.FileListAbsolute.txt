@@ -28,7 +28,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\b
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\Newtonsoft.Json.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookBusinessLogic.dll
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookDataAccess.dll
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookEntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.Helpers.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.Mvc.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.Optimization.dll
@@ -38,7 +38,7 @@ C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\b
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\System.Web.WebPages.Razor.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\WebGrease.dll
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookBusinessLogic.pdb
-C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookDataAccess.pdb
+C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\PastebookEntityFramework.pdb
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\EntityFramework.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\EntityFramework.SqlServer.xml
 C:\Users\Bootcamp\Source\Repos\pastebook.com\Pastebook\PastebookWebApplication\bin\Microsoft.AI.DependencyCollector.xml

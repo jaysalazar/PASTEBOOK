@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PastebookDataAccess
+namespace PastebookEntityFramework
 {
     using System;
     using System.Collections.Generic;
