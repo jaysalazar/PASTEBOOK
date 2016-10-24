@@ -9,63 +9,88 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            @*<div class="navbar-header">
-                    <div class="navbar-brand">
-                        <img src="~/Content/Images/pastebook-logo.png" alt="Pastebook" class="img-responsive" />
-                    </div>
-                </div>*@
-            @if (Session["CurrentUser"] != null)
-            {
+    <div class="navbar navbar-fixed-top">
+        <div class="navar-brand container">
+            <a href="@Url.Action("LogIn","Account")">
+                <img src="~/Content/Images/pastebook-logo.png" alt="Pastebook" class="imgAccount" />
+            </a>
+        </div>
+    </div>
+
+    @if (Session["CurrentUser"] != null)
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
                 <div class="navbar-header">
-                    @*<div class="navbar-brand">
-                        <a href="@Url.Action("Index","Home")">
-                            <img src="~/Content/Images/pastebook-icon.png" alt="Pastebook" class="img-responsive" />
-                        </a>
-                    </div>*@
-                    @Html.ActionLink("Pastebook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index","Home")">
+                        <img src="~/Content/Images/pastebook-logo.png" alt="Pastebook" id="imgHome" />
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="txtSearch"><input type="text" class="form-control txtSearch" placeholder="Search for people you may know..."></li>
-                        <li class="btnSearch"><button class="btn btn-default">Search</button></li>
-                        <li>@Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
-                                             new { username = Session["CurrentUser"].ToString()}, null)</li>
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="navUser">
+                            @Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
+                                             new { username = Session["CurrentUser"].ToString() }, null)
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-user"></span>
+                            @Html.ActionLink("Home", "Index", "Home")
+                        </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Friends
+                                <span class="glyphicon glyphicon-user"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
-                                <li>@Html.ActionLink("Friend request", "Index", "Home")</li>
+                                <li><a href="#">Friend</a></li>
+                                <li><a href="#">Friend</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Notifications
+                                <span class="glyphicon glyphicon-globe"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Notification", "Index", "Home")</li>
-                                <li>@Html.ActionLink("Notification", "Index", "Home")</li>
+                                <li><a href="#">Notification</a></li>
+                                <li><a href="#">Notification</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Account
-                                <span class="caret"></span>
+                                <span class="glyphicon glyphicon-lock"></span>
+                                <span class="glyphicon glyphicon-triangle-bottom"></span>
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
+                                             new { username = Session["CurrentUser"].ToString() }, null)
+                                </li>
+                                <li class="divider"></li>
                                 <li>@Html.ActionLink("Settings", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Logout", "LogOut", "Account")</li>
                             </ul>
                         </li>
                     </ul>
+
+                    <form class="navbar-form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control input-sm" placeholder="Search people you know...">
+                                <button class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            }
+            </div>
         </div>
-    </div>
+    }
+
     <div class="container body-content">
         @RenderBody()
     </div>

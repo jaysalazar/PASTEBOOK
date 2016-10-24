@@ -24,14 +24,156 @@ textarea {
 }
 
 /* Layout */
-li.txtSearch {
-    margin: 8px auto;
+
+/* Login/Register */
+
+/* navbar */
+.imgAccount {
+    width: 270px;
 }
 
-.btnSearch {
-    margin: 8px 170px 8px 5px;
+/* content */
+.wllLogin {
+    margin-top: 80px;
 }
 
-.txtSearch {
-    width: 250px;
+.wllRegister {
+    margin-top: 21px;
+}
+
+.frmLogin {
+    margin-top: 25px;
+    margin-left: 60px;
+}
+
+.frmGrpLogin {
+    margin-left: 35px;
+}
+
+.frmRegister {
+    margin-left: 105px;
+}
+
+.frmBtn {
+    margin-top: 30px;
+}
+
+.control-label {
+    margin-top: 15px;
+}
+
+.control-label, .divImg, .txtFullName, .txtDateCreated, .divTxtaComment {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+h1, .divOr {
+    text-align: center;
+}
+
+/* Home */
+
+/* navbar */
+.container {
+    height: 1px;
+}
+
+.navbar-header {
+    height: 1px;
+}
+
+.navbar-brand {
+    width: 70%;
+    padding: 4px;
+}
+
+.navbar-form .input-group > .form-control {
+    width: 200px;
+}
+
+.input-group {
+    margin: 4px auto;
+    padding-left: 150px;
+}
+
+.input-group-addon {
+    height: 30px;
+}
+
+#imgHome {
+    width: 45%;
+}
+
+/* content */
+.home {
+    margin-top: 50px;
+}
+
+.list-group, .divAboutMe {
+    margin-top: 30px;
+}
+
+.divAction {
+    margin: 4px auto;
+}
+
+.txtFullName {
+    margin: 7px auto;
+    font-size: 16px;
+}
+
+.txtPosterName {
+    font-weight: bold;
+}
+
+.txtDateCreated {
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.txtaPost {
+    max-width: 603px;
+}
+
+.txtPost {
+    word-wrap: break-word;
+}
+
+.imgCommenter {
+    max-width: 62%;
+}
+
+/* Profile */
+/* content */
+.txtProfileFullName {
+    font-size: 24px;
+    text-decoration: none;
+}
+/* try using js (show on hover) */
+.flUpload, .btnUploadPicture {
+    display: none;
+}
+
+.divUploadPicture:hover, .btnUploadPicture {
+    display: block;
+}
+
+.divBtnGrp {
+    margin: 20px auto;
+}
+
+.divTimeline {
+    margin-left: 359px;
+}
+
+.txtaProfilePost {
+    max-width: 612px;
+}
+
+.txtEdit {
+    text-decoration: underline;
+}
+
+.glyphicon {
+    font-family: Arial;
 }

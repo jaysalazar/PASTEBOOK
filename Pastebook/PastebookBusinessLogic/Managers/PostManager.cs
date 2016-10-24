@@ -73,7 +73,7 @@ namespace PastebookBusinessLogic.Managers
                 userEntity.ID = friendEntity.USER_ID;
 
                 //todo: remove common posts by distinct (but distinct not working)
-                var result = RetrievePostToTimeline(userEntity).Distinct().Union(newsFeedResult);
+                var result = RetrievePostToTimeline(userEntity).Union(newsFeedResult).OrderByDescending(x => x.CREATED_DATE).Take(100).Distinct();
 
 
                 foreach (var post in result)

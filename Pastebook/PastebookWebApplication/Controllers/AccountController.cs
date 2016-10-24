@@ -1,5 +1,4 @@
 ﻿using PastebookBusinessLogic.Managers;
-using PastebookDataAccess;
 using PastebookEntityFramework;
 using PastebookWebApplication.Models;
 using System.Web.Mvc;
