@@ -7,41 +7,18 @@ namespace PastebookBusinessLogic.Managers
 {
     public class CommentManager : Repository<PB_COMMENT>
     {
-        public int AddComment(PB_COMMENT commentEntity)
+        public int AddComment(PB_COMMENT commentModel)
         {
-            int result = 0;
-
-            try
-            {
-                result = Add(commentEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            int result = Add(commentModel);
 
             return result;
         }
 
-        public List<PB_COMMENT> RetrieveComments(int postId)
+        public List<PB_COMMENT> RetrieveComments(int postID)
         {
             List<PB_COMMENT> comments = new List<PB_COMMENT>();
 
-            try
-            {
-                var result = Retrieve(x => x.POST_ID == postId);
-
-                foreach (var comment in result)
-                {
-                    comments.Add(comment);
-                }
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            comments = Retrieve(x => x.POST_ID == postID);
 
             return comments;
         }

@@ -1,33 +1,71 @@
-﻿@model PastebookWebApplication.Models.PastebookModel
+﻿@model PastebookEntityFramework.PB_USER
 
 @{
     ViewBag.Title = "Pastebook";
 }
 
-<div class="container">
-    HOME
-    <div class="row">
-        <div class="col-md-3">
-            <div class="col-md-12">
-                @Html.ActionLink(@Model.UserEntity.FIRST_NAME + " " + @Model.UserEntity.LAST_NAME, "Index", new { username = Model.UserEntity.USER_NAME }, null)
+<div class="form-horizontal home">
+    <div class="col-md-4">
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "Profile", new { username = Model.USER_NAME })">
+                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail"> @* User Profile Pic here linked to profile *@
+            </a>
+        </div>
+        <div class="col-md-8 txtFullName">
+            @Html.ActionLink(Model.FIRST_NAME + " " + Model.LAST_NAME, "Index", "Profile", new { username = Model.USER_NAME }, null)
+        </div>
+        <div class="col-md-10">
+            <div class="list-group">
+                @Html.ActionLink("Profile", "Index", "Profile", new { username = Model.USER_NAME }, new { @class = "list-group-item" })
+                @Html.ActionLink("Friends", "Friends", "Friend", new { userID = Model.ID }, new { @class = "list-group-item" })
             </div>
+        </div>
+    </div>
 
-            @Html.ActionLink("Friends", "Index", "Home", new { @class = "btn btn-default" })
-        </div>
-        <div class="col-md-10 col-md-offset-2">
-            <div class="row">
-                <div>@Html.TextArea("Post", new { @class = "form-control", id = "txtPost" })</div>
-                <div>
-                    @Html.ActionLink("Post", "Newsfeed", "Home", new { @class = "btn btn-default", id = "btnPost" })
-                </div>
-                <div>
-                    @{ Html.RenderAction("NewsFeed", "Home", new { id = Model.UserEntity.ID }); }
-                </div>
-            </div>
-        </div>
+    <div class="col-md-7 reloadView">
+        @* News feed partial view *@
+        @{ Html.RenderAction("NewsFeed", "Home", new { userID = Model.ID }); }
     </div>
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var CreatePostUrl = '@Url.Action("CreatePost", "Home")'
+        var ReloadViewUrl = '@Url.Action("NewsFeed", "Home", new { userID = (int)Session["CurrentUserID"]})'
+
+        function createPost() {
+            var data = {
+                content: $('#txtaContent').val()
+            }
+
+            $.ajax({
+                url: CreatePostUrl,
+                data: data,
+                type: 'GET',
+                success: function () {
+                    reload();
+                }
+            })
+
+            //reload
+            function reload() {
+                $('#txtaContent').val("");
+                $('.reloadView').load(ReloadViewUrl);
+            }
+        };
+
+        // source: http://stackoverflow.com/questions/4644027/how-to-automatically-reload-a-page-after-a-given-period-of-inactivity
+        setInterval(function () { autoloadpage(); }, 60000); // it will call the function autoload() after each 30 seconds.
+        function autoloadpage() {
+            $.ajax({
+                url: ReloadViewUrl,
+                type: "POST",
+                success: function (data) {
+                    $(".reloadView").html(data); // here the wrapper is main div
+                }
+            });
+        }
+    </script>
 }

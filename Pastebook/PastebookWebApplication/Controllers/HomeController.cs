@@ -1,5 +1,6 @@
 ﻿using PastebookBusinessLogic.Managers;
 using PastebookEntityFramework;
+using PastebookWebApplication.Managers;
 using PastebookWebApplication.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -12,40 +13,44 @@ namespace PastebookWebApplication.Controllers
         public ActionResult Index()
         {
             // if a user is logged in go to home
-            if (Session["CurrentUser"] != null)
+            if (Session["CurrentUserID"] != null)
             {
-                UserManager userManager = new UserManager();
                 PB_USER userModel = new PB_USER();
-                PastebookModel model = new PastebookModel();
+                UserManager userManager = new UserManager();
 
                 // retrieve current user
-                string username = (string)Session["CurrentUser"];
-                userModel = userManager.RetrieveUser(username);
-                // save to userModel
-                model.UserEntity = userModel;
+                int userID = (int)Session["CurrentUserID"];
+                userModel = userManager.RetrieveUserByID(userID);
 
-                return View(model);
+                return View(userModel);
             }
 
             return RedirectToAction("LogIn", "Account");
         }
 
-        public ActionResult NewsFeed(int id)
+        public ActionResult NewsFeed(int userID)
         {
+            List<UserPostViewModel> modelList = new List<UserPostViewModel>();
+            RetrieveManager manager = new RetrieveManager();
 
+            modelList = manager.RetrievePosts(userID);
+
+            return PartialView(modelList);
+        }
+
+        public JsonResult CreatePost(string content)
+        {
             PostManager postManager = new PostManager();
-            FriendManager friendManager = new FriendManager();
-            List<PB_POST> posts = new List<PB_POST>();
-            List<PB_FRIEND> friends = new List<PB_FRIEND>();
 
-            friends = friendManager.RetrieveAllFriends(id);
-
-            foreach (var friend in friends)
+            PB_POST post = new PB_POST
             {
-                posts = postManager.RetrievePostToNewsFeed(friend);
-            }
+                POSTER_ID = (int)Session["CurrentUserID"],
+                PROFILE_OWNER_ID = (int)Session["CurrentUserID"],
+                CONTENT = content
+            };
 
-            return PartialView(posts);
+            var result = postManager.CreatePost(post);
+            return Json(new { result = result }, JsonRequestBehavior.AllowGet);
         }
     }
 }

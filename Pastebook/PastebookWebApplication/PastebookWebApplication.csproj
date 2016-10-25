@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
     <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -164,8 +165,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\DataTransferManager.cs" />
+    <Compile Include="Managers\RetrieveComment.cs" />
+    <Compile Include="Managers\RetrieveManager.cs" />
     <Compile Include="Models\LogInModel.cs" />
-    <Compile Include="Models\PastebookModel.cs" />
+    <Compile Include="Models\UserPostViewModel.cs" />
+    <Compile Include="Models\PostModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -222,12 +227,12 @@
     <Content Include="Views\Friend\Friends.cshtml" />
     <Content Include="Views\Home\Settings.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
-    <Content Include="Views\Post\Post.cshtml" />
+    <Content Include="Views\Post\Posts.cshtml" />
     <Content Include="Views\Post\Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Managers\" />
+    <Folder Include="Views\Action\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

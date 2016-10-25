@@ -1,31 +1,104 @@
-﻿@model PastebookWebApplication.Models.PastebookModel
+﻿@model PastebookWebApplication.Models.UserPostViewModel
 
 @{
     ViewBag.Title = Model.UserEntity.FIRST_NAME + " " + Model.UserEntity.LAST_NAME;
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="col-md-12">
-                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Pic" class="img-circle" />
+<div class="form-horizontal home">
+    <div class="col-md-11">
+        <div class="col-md-3 col-md-offset-1">
+            <img src="Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail">
+            <div class="divUploadPicture">
+                <!-- http://plugins.krajee.com/file-input/demo -->
+                <label class="btn btn-default btn-file btn-block btnUploadPicture">
+                    Update profile picture <input type="file" class="flUpload">
+                </label>
             </div>
-            <div class="col-md-12"><a >@Model.UserEntity.FIRST_NAME @Model.UserEntity.LAST_NAME</a></div>
+            <div class="divAboutMe">
+                <label class="col-md-6">About Me:</label>
+                <a href="#" class="col-md-4 col-md-offset-2 txtEdit">+ Edit</a>
+                <p class="txtPost col-md-12">aposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjsjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjsjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdaposdjaksdalksjdalksjdalksjdlaksjdlkajsdlaksjdapos0</p>
+            </div>
         </div>
         <div class="col-md-8">
-            <div class="row">
-                <div>
-                    @Html.TextAreaFor(model => model.PostEntity.CONTENT, new { @class = "form-control", id = "txtContent", placeholder = "Write something..." })
-                    @Html.HiddenFor(model => model.PostEntity.ID)
+            <a href="#" class="txtProfileFullName">@Model.UserEntity.FIRST_NAME @Model.UserEntity.LAST_NAME</a>
+            <a href="#" class="btn btn-primary divBtnGrp hidden">Add Friend</a>
+            <div class="btn-group btn-group-justified divBtnGrp">
+                <a href="#" class="btn btn-primary active">Timeline</a>
+                <a href="#" class="btn btn-primary">Information</a>
+            </div>
+
+
+
+            <!-- TIMELINE VIEW HERE -->
+            <div class="panel">
+                <div class="panel-heading"></div>
+                <div class="panel-body">
+                    <!-- http://stackoverflow.com/questions/454202/creating-a-textarea-with-auto-resize -->
+                    <textarea placeholder="Write something..." cols="100" rows="5" class="txtaProfilePost"></textarea>
+                    <!-- disable when no chars on text area -->
+                    <a class="btn btn-primary pull-right">Post</a>
                 </div>
-                <div>
-                    @*click post > save username*@
-                    @Html.ActionLink("Post", "Timeline", "Profile" @*,new { username = Model.User.USER_NAME}*@, new { @class = "btn btn-default", id = "btnPost" })
+            </div>
+            <!-- POST PARTIAL VIEW -->
+            <div class="panel">
+                <div class="panel-heading col-md-12">
+                    <div class="col-md-2">
+                        <img src="Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail">
+                    </div>
+                    <div class="col-md-10 txtFullName txtPosterName">
+                        <a href="#">Abcdefghijklmnopqrstuvwxyz Abcdefghijklmnopqrstuvwxyz</a>
+                    </div>
+                    <div class="col-md-8 txtDateCreated">
+                        October 12, 2016 12:00pm
+                    </div>
                 </div>
-                @{ Html.RenderAction("NewsFeed", "Home", new { id = Model.UserEntity.ID }); }
+                <div class="panel-body">
+                    <div class="col-md-12 txtPost">
+                        asd;ajdlaksjfldkgjldkgjadlgkjdslkgsdlkgsldkgslgkjdslkjdslkgjsdlkfjalkfjalskjaslkdjaslkdjalskdjsd;lfks;ldfks;dlfks;ldfks;ldkfs;ldfk[POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST]
+                        [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST]
+                        [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST]
+                        [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST] [POST]
+                    </div>
+                </div>
+                <!-- LIKE AND COMMENT PARTIAL VIEW -->
+                <div class="panel-footer clearfix">
+                    <div class="col-md-12 divAction">
+                        <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>1</a>
+                    </div>
+                    <div class="col-md-12 divAction">
+                        <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span>Like</a>
+                        <!-- collapse comment -->
+                        <!-- http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-accordion.php -->
+                        <a><span class="glyphicon glyphicon-comment"></span>Comment</a>
+                        <div class="divAction" id="comment">
+                            <div class="col-md-12 divAction">
+                                <div class="col-md-1 divImg">
+                                    <img src="Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                                </div>
+                                <div class="col-md-10 divTxtaComment">
+                                    <a href="#" class="txtPosterName">Abcdefghijklmnopqrstuvwxyz Abcdefghijklmnopqrstuvwxyz</a>
+                                </div>
+                                <div class="col-md-10 txtPost">
+                                    asdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjd
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 txtDateCreated">
+                                    October 12, 2016 12:00pm
+                                </div>
+                            </div>
+                            <div class="col-md-12 divAction">
+                                <div class="col-md-1 divImg">
+                                    <img src="Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                                </div>
+                                <div class="col-md-10 divTxtaComment">
+                                    <textarea class="txtaPost" cols="80" rows="1" placeholder="Write a comment..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-2"></div>
     </div>
 </div>
 

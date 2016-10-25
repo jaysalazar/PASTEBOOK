@@ -1,186 +1,111 @@
-﻿using PastebookBusinessLogic.Managers;
-using PastebookDataAccess;
+﻿using PastebookDataAccess;
 using PastebookEntityFramework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PastebookBusinessLogic.Managers
 {
     public class UserManager : Repository<PB_USER>
     {
-        PasswordManager passwordManager = new PasswordManager();
-
-        public int CreateUser(PB_USER userEntity)
+        public int CreateUser(PB_USER userModel)
         {
-            int result = 0;
+            PasswordManager passwordManager = new PasswordManager();
             string salt = "";
 
-            userEntity.USER_NAME = userEntity.USER_NAME.Trim();
-            userEntity.PASSWORD = userEntity.PASSWORD.Trim();
-            userEntity.PASSWORD = passwordManager.GeneratePasswordHash(userEntity.PASSWORD, out salt);
-            userEntity.SALT = salt;
-            userEntity.FIRST_NAME = userEntity.FIRST_NAME.Trim();
-            userEntity.LAST_NAME = userEntity.LAST_NAME.Trim();
-            userEntity.MOBILE_NO = userEntity.MOBILE_NO.Trim();
-            userEntity.DATE_CREATED = DateTime.UtcNow;
-            userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToUniversalTime();
-            userEntity.EMAIL_ADDRESS = userEntity.EMAIL_ADDRESS.Trim();
+            userModel.PASSWORD = passwordManager.GeneratePasswordHash(userModel.PASSWORD, out salt);
+            userModel.SALT = salt;
+            userModel.DATE_CREATED = DateTime.UtcNow;
+            userModel.BIRTHDAY = userModel.BIRTHDAY.ToUniversalTime();
 
-            if (userEntity.ABOUT_ME != null)
-            {
-                userEntity.ABOUT_ME.Trim();
-            }
-
-            try
-            {
-                result = Add(userEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            int result = Add(userModel);
 
             return result;
         }
 
-        public PB_USER RetrieveUser(string username)
+        public int UpdateUser(PB_USER userModel)
         {
-            PB_USER userEntity = new PB_USER();
+            userModel.DATE_CREATED = userModel.DATE_CREATED.ToUniversalTime();
+            userModel.BIRTHDAY = userModel.BIRTHDAY.ToUniversalTime();
 
-            try
-            {
-                userEntity = Retrieve(x => x.USER_NAME == username).SingleOrDefault();
-                userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToLocalTime();
-                userEntity.DATE_CREATED = userEntity.DATE_CREATED.ToLocalTime();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            int result = Edit(userModel);
 
-            return userEntity;
+            return result;
+        }
+
+        public PB_USER RetrieveUserByID(int userID)
+        {
+            PB_USER userModel = new PB_USER();
+
+            userModel = RetrieveSpecific(x => x.ID == userID);
+
+            userModel.BIRTHDAY = userModel.BIRTHDAY.ToLocalTime();
+            userModel.DATE_CREATED = userModel.DATE_CREATED.ToLocalTime();
+
+            return userModel;
         }
 
         public PB_USER RetrieveUserByEmail(string email)
         {
-            PB_USER userEntity = new PB_USER();
+            PB_USER userModel = new PB_USER();
 
-            try
-            {
-                userEntity = Retrieve(x => x.EMAIL_ADDRESS == email).SingleOrDefault();
-                // try
-                userEntity.BIRTHDAY.ToLocalTime();
-                // userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToLocalTime();
-                userEntity.DATE_CREATED = userEntity.DATE_CREATED.ToLocalTime();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            userModel = RetrieveSpecific(x => x.EMAIL_ADDRESS == email);
 
-            return userEntity;
-        }
+            userModel.BIRTHDAY = userModel.BIRTHDAY.ToLocalTime();
+            userModel.DATE_CREATED = userModel.DATE_CREATED.ToLocalTime();
 
-        public int UpdateUser(PB_USER userEntity)
-        {
-            int result = 0;
-
-            userEntity.DATE_CREATED = userEntity.DATE_CREATED.ToUniversalTime();
-            userEntity.BIRTHDAY = userEntity.BIRTHDAY.ToUniversalTime();
-
-            try
-            {
-                result = Edit(userEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
-
-            return result;
+            return userModel;
         }
 
         public List<PB_USER> SearchUsers(string name)
         {
             List<PB_USER> users = new List<PB_USER>();
 
-            try
-            {
-                var result = Retrieve(x => x.FIRST_NAME == name || x.LAST_NAME == name);
+            users = Retrieve(x => x.FIRST_NAME == name || x.LAST_NAME == name);
 
-                foreach (var user in result)
-                {
-                    user.BIRTHDAY = user.BIRTHDAY.ToLocalTime();
-                    users.Add(user);
-                }
-            }
-            catch (Exception ex)
+            foreach (var user in users)
             {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
+                user.BIRTHDAY = user.BIRTHDAY.ToLocalTime();
+                users.Add(user);
             }
 
             return users;
-        } 
+        }
 
-        public bool CheckPassword(string password, string salt, string hash)
+        public bool CheckPassword(string email, string password)
         {
-            bool result = false;
+            PB_USER user = new PB_USER();
+
+            user = RetrieveSpecific(x => x.EMAIL_ADDRESS == email);
+
             PasswordManager passwordManager = new PasswordManager();
 
-            try
-            {
-                result = passwordManager.IsPasswordMatch(password, salt, hash);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            bool result = passwordManager.IsPasswordMatch(password, user.SALT, user.PASSWORD);
 
             return result;
         }
 
         public bool CheckEmailAddress(string emailAddress)
         {
-            bool result = false;
-
-            try
-            {
-                result = Retrieve().Any(x => x.EMAIL_ADDRESS == emailAddress);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            bool result = Check(x => x.EMAIL_ADDRESS == emailAddress);
 
             return result;
         }
 
         public bool CheckUsername(string username)
         {
-            bool result = false;
-
-            using (var context = new PASTEBOOK_DBEntities())
-            {
-                try
-                {
-                    result = Retrieve().Any(x => x.USER_NAME == username);
-                }
-                catch (Exception ex)
-                {
-                    List<Exception> exceptionList = new List<Exception>();
-                    exceptionList.Add(ex);
-                }
-            }
+            bool result = Check(x => x.USER_NAME == username);
 
             return result;
+        }
+
+        public bool ConfirmPassword(string password, string confirmPassword)
+        {
+            if (password == confirmPassword)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -25,6 +25,8 @@ namespace PastebookWebApplication
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-3.3.2.min.css",
                       "~/Content/bootstrap-slate.min.css",
                       "~/Content/site.css"));
         }

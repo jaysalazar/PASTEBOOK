@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PastebookEntityFramework;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,16 +7,17 @@ namespace PastebookWebApplication.Models
 {
     public class RegisterModel
     {
+        public PB_USER User { get; set; }
+
         public int ID { get; set; }
 
         public string Username { get; set; }
-
+        
         public string Password { get; set; }
 
         public string Salt { get; set; }
 
         [DisplayName("Confirm Password")]
-        [Compare("Password", ErrorMessage = "{0}s do not match.")]
         public string ConfirmPassword { get; set; }
 
         [DisplayName("First Name")]
@@ -37,6 +39,5 @@ namespace PastebookWebApplication.Models
         public string Email { get; set; }
 
         public DateTime DateCreated { get; set; }
-
     }
 }

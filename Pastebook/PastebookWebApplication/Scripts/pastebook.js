@@ -3,33 +3,41 @@
     $('#btnRegister').click(function () {
 
         var data = {
-            email: '#txtEmailAddress',
-            username: '#txtUsername',
-            password: '#txtPassword',
-            confirmPassword: '#txtConfirmPassword'
-        }
-
-        if (data.password === data.confirmPassword) {
-            $('#spnConfirmPassword').show();
-        }
+            email: $('#txtEmailAddress').val(),
+            username: $('#txtUsername').val()
+        };
 
         $.ajax({
             url: CheckEmailUrl,
             data: data.email,
-            type: 'POST',
+            type: 'GET',
             success: function (data) {
                 CheckEmail(data);
             }
-        })
+        });
 
         $.ajax({
             url: CheckUsernameUrl,
             data: data.username,
-            type: 'POST',
+            type: 'GET',
             success: function (data) {
                 CheckUsername(data);
             }
-        })
+        });
+
+        var passwords = {
+            password: $('#txtPassword').val(),
+            confirmPassword: $('#txtConfirmPassword').val()
+        };
+
+        $.ajax({
+            url: ConfirmPasswordUrl,
+            data: passwords,
+            type: 'GET',
+            success: function (data) {
+                ConfirmPassword(data);
+            }
+        });
 
         function CheckEmail(data) {
             if (data.Result == true) {
@@ -42,25 +50,12 @@
                 $('#spnUsername').show();
             }
         }
-    })
 
-    $('#btnPost').click(function () {
-        var data = {
-            content: '#txtContent'
-        }
-
-        $.ajax({
-            url: GetPostUrl,
-            data: data,
-            type: 'POST',
-            success: function (data) {
-                alert('success');
-                location.reload();
+        function ConfirmPassword(data) {
+            if (data.Result == true) {
+                $('#spnConfirmPassword').show();
             }
-        })
-
-        function GetPost(data) {
-            //do something
         }
-    })
+
+    });
 });

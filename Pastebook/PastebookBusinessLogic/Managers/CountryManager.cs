@@ -1,8 +1,6 @@
 ﻿using PastebookDataAccess;
 using PastebookEntityFramework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PastebookBusinessLogic.Managers
 {
@@ -12,20 +10,7 @@ namespace PastebookBusinessLogic.Managers
         {
             List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
 
-            try
-            {
-                var result = Retrieve();
-
-                foreach (var country in result)
-                {
-                    countries.Add(country);
-                }
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
+            countries = RetrieveAll();
 
             return countries;
         }

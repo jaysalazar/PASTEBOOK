@@ -1,50 +1,62 @@
 ﻿using PastebookBusinessLogic.Managers;
 using PastebookEntityFramework;
-using PastebookWebApplication.Models;
 using System.Web.Mvc;
 
 namespace PastebookWebApplication.Controllers
 {
     public class AccountController : Controller
     {
-        CountryManager countryManager = new CountryManager();
-        UserManager userManager = new UserManager();
-
         // site/
         [HttpGet]
         public ActionResult Register()
         {
-            if (Session["CurrentUser"] != null)
+            CountryManager countryManager = new CountryManager();
+            UserManager userManager = new UserManager();
+
+            ViewBag.Countries = countryManager.RetrieveAllCountries();
+
+            if (Session["CurrentUserID"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Countries = countryManager.RetrieveAllCountries();
             return View();
         }
 
+        // TODO: fix this
         [HttpPost]
-        public ActionResult Register(PB_USER userModel)
+        public ActionResult Register(PB_USER userModel, string confirmPassword)
         {
+            CountryManager countryManager = new CountryManager();
+            UserManager userManager = new UserManager();
+
             ViewBag.Countries = countryManager.RetrieveAllCountries();
 
+            // check any existing email
             if (userManager.CheckEmailAddress(userModel.EMAIL_ADDRESS) == true)
             {
-                ModelState.AddModelError("Email", "Email is already taken.");
+                ModelState.AddModelError("EMAIL_ADDRESS", "Email is already taken.");
                 return View();
             }
 
+            // check any existing username
             if (userManager.CheckUsername(userModel.USER_NAME) == true)
             {
-                ModelState.AddModelError("Username", "Username is already taken.");
+                ModelState.AddModelError("USER_NAME", "Username is already taken.");
+                return View();
+            }
+
+            // confirm password
+            if (userManager.ConfirmPassword(userModel.PASSWORD, confirmPassword) == true)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
                 return View();
             }
 
             if (ModelState.IsValid)
             {
-                // TODO: go to home page. display success
                 userManager.CreateUser(userModel);
-                return RedirectToAction("LogIn");
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
@@ -54,7 +66,7 @@ namespace PastebookWebApplication.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            if (Session["CurrentUser"] != null)
+            if (Session["CurrentUserID"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -63,36 +75,35 @@ namespace PastebookWebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn(LogInModel model)
+        public ActionResult LogIn(PB_USER userModel)
         {
-            if (userManager.CheckEmailAddress(model.Email))
+            UserManager userManager = new UserManager();
+
+            if (userManager.CheckEmailAddress(userModel.EMAIL_ADDRESS))
             {
-                PB_USER userModel = new PB_USER();
+                bool result = userManager.CheckPassword(userModel.EMAIL_ADDRESS, userModel.PASSWORD);
 
-                userModel = userManager.RetrieveUserByEmail(model.Email);
-
-                bool result = userManager.CheckPassword(model.Password, userModel.SALT, userModel.PASSWORD);
-
-                if (result)
+                if (result == true)
                 {
-                    if (ModelState.IsValid)
-                    {
-                        Session["CurrentUser"] = userModel.USER_NAME;
-                        Session["FirstName"] = userModel.FIRST_NAME;
-                        return RedirectToAction("Index", "Home");
-                    }
+                    // get user data
+                    userModel = userManager.RetrieveUserByEmail(userModel.EMAIL_ADDRESS);
+                    Session["CurrentUserID"] = userModel.ID;
+                    Session["Username"] = userModel.USER_NAME;
+                    Session["FirstName"] = userModel.FIRST_NAME;
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("User.PASSWORD", "Incorrect Password.");
+                    ModelState.AddModelError("PASSWORD", "Incorrect Password.");
                 }
             }
             else
             {
-                ModelState.AddModelError("User.EMAIL_ADDRESS", "Email doesn't match any account.");
+                ModelState.AddModelError("EMAIL_ADDRESS", "Email doesn't match any account.");
             }
 
-            return View("LogIn");
+            return View();
         }
 
         public ActionResult LogOut()
@@ -104,20 +115,23 @@ namespace PastebookWebApplication.Controllers
 
         public JsonResult CheckEmail(string emailAddress)
         {
+            UserManager userManager = new UserManager();
             bool result = userManager.CheckEmailAddress(emailAddress);
             return Json(new { Result = result });
         }
 
         public JsonResult CheckUsername(string username)
         {
+            UserManager userManager = new UserManager();
             bool result = userManager.CheckUsername(username);
             return Json(new { Result = result });
         }
 
-        //public JsonResult ConfirmPassword(string password)
-        //{
-        //    bool result = userManager.CheckPassword(password);
-        //    return Json(new { Result = result });
-        //}
+        public JsonResult ConfirmPassword(string password, string confirmPassword)
+        {
+            UserManager userManager = new UserManager();
+            bool result = userManager.ConfirmPassword(password, confirmPassword);
+            return Json(new { Result = result });
+        }
     }
 }

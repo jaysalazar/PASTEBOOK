@@ -87,21 +87,28 @@ h1, .divOr {
     padding: 4px;
 }
 
+.navbar-inverse .navbar-nav > li > a {
+    border: none;
+}
+
 .navbar-form .input-group > .form-control {
     width: 200px;
 }
 
 .input-group {
     margin: 4px auto;
-    padding-left: 150px;
+    padding-left: 225px;
 }
 
 .input-group-addon {
     height: 30px;
+    padding-top: 5px;
 }
 
 #imgHome {
-    width: 45%;
+    width: 13%;
+    position: absolute;
+    z-index: 1;
 }
 
 /* content */
@@ -131,7 +138,7 @@ h1, .divOr {
     font-size: 12px;
 }
 
-.txtaPost {
+.txtaPost, txtaProfilePost {
     max-width: 603px;
 }
 
@@ -166,14 +173,17 @@ h1, .divOr {
     margin-left: 359px;
 }
 
-.txtaProfilePost {
-    max-width: 612px;
-}
-
 .txtEdit {
     text-decoration: underline;
 }
 
-.glyphicon {
-    font-family: Arial;
+#lblActions {
+    text-indent: 3px;
+    text-decoration: none;
+    font-weight: normal;
+    cursor: pointer;
 }
+
+    #lblActions:hover {
+        text-decoration: underline;
+    }

@@ -11,13 +11,21 @@ namespace PastebookDataAccess
     // source: http://www.tugberkugurlu.com/archive/generic-repository-pattern-entity-framework-asp-net-mvc-and-unit-testing-triangle
     public class Repository<T> where T : class
     {
-        public List<T> Retrieve()
+        public List<T> RetrieveAll()
         {
             List<T> result = new List<T>();
 
             using (var context = new PASTEBOOK_DBEntities())
             {
-                result = context.Set<T>().ToList();
+                try
+                {
+                    result = context.Set<T>().ToList();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
             }
 
             return result;
@@ -29,7 +37,55 @@ namespace PastebookDataAccess
 
             using (var context = new PASTEBOOK_DBEntities())
             {
-                result = context.Set<T>().Where(predicate).ToList();
+                try
+                {
+                    result = context.Set<T>().Where(predicate).ToList();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return result;
+        }
+
+        public T RetrieveSpecific(Expression<Func<T, bool>> predicate)
+        {
+            T result = null;
+
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    result = context.Set<T>().Single(predicate);
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return result;
+        }
+
+        public bool Check(Expression<Func<T, bool>> predicate)
+        {
+            bool result = false;
+
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    result = context.Set<T>().Any(predicate);
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
             }
 
             return result;
@@ -41,8 +97,16 @@ namespace PastebookDataAccess
 
             using (var context = new PASTEBOOK_DBEntities())
             {
-                context.Set<T>().Add(entity);
-                result = Save();
+                try
+                {
+                    context.Set<T>().Add(entity);
+                    result = context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
             }
 
             return result;
@@ -54,8 +118,16 @@ namespace PastebookDataAccess
 
             using (var context = new PASTEBOOK_DBEntities())
             {
-                context.Entry(entity).State = EntityState.Modified;
-                result = Save();
+                try
+                {
+                    context.Entry(entity).State = EntityState.Modified;
+                    result = context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
             }
 
             return result;
@@ -67,19 +139,19 @@ namespace PastebookDataAccess
 
             using (var context = new PASTEBOOK_DBEntities())
             {
-                context.Set<T>().Remove(entity);
-                result = Save();
+                try
+                {
+                    context.Set<T>().Remove(entity);
+                    result = context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
             }
 
             return result;
-        }
-
-        public int Save()
-        {
-            using (var context = new PASTEBOOK_DBEntities())
-            {
-                return context.SaveChanges();
-            }
         }
     }
 }

@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\CommentManager.cs" />
-    <Compile Include="Managers\InputManager.cs" />
+    <Compile Include="Managers\DataTransferManager.cs" />
     <Compile Include="Managers\LikeManager.cs" />
     <Compile Include="Managers\CountryManager.cs" />
     <Compile Include="Managers\FriendManager.cs" />
