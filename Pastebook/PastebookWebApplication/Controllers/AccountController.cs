@@ -1,5 +1,8 @@
 ﻿using PastebookBusinessLogic.Managers;
 using PastebookEntityFramework;
+using PastebookWebApplication.Models;
+using System.Collections;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace PastebookWebApplication.Controllers
@@ -10,55 +13,62 @@ namespace PastebookWebApplication.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            CountryManager countryManager = new CountryManager();
-            UserManager userManager = new UserManager();
-
-            ViewBag.Countries = countryManager.RetrieveAllCountries();
-
             if (Session["CurrentUserID"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
+            CountryManager countryManager = new CountryManager();
+            UserManager userManager = new UserManager();
+
+            countries = countryManager.RetrieveAllCountries();
+
+            RegisterViewModel model = new RegisterViewModel
+            {
+                Countries = countries
+            };
+
+            return View(model);
         }
 
         // TODO: fix this
         [HttpPost]
-        public ActionResult Register(PB_USER userModel, string confirmPassword)
+        public ActionResult Register(RegisterViewModel model)
         {
-            CountryManager countryManager = new CountryManager();
+            //List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
+            //CountryManager countryManager = new CountryManager();
             UserManager userManager = new UserManager();
 
-            ViewBag.Countries = countryManager.RetrieveAllCountries();
+            //countries = countryManager.RetrieveAllCountries();
 
             // check any existing email
-            if (userManager.CheckEmailAddress(userModel.EMAIL_ADDRESS) == true)
+            if (userManager.CheckEmailAddress(model.User.EMAIL_ADDRESS) == true)
             {
-                ModelState.AddModelError("EMAIL_ADDRESS", "Email is already taken.");
+                ModelState.AddModelError("EMAIL_ADDRESS", "Email is already taken");
                 return View();
             }
 
             // check any existing username
-            if (userManager.CheckUsername(userModel.USER_NAME) == true)
+            if (userManager.CheckUsername(model.User.USER_NAME) == true)
             {
-                ModelState.AddModelError("USER_NAME", "Username is already taken.");
+                ModelState.AddModelError("USER_NAME", "Username is already taken");
                 return View();
             }
 
             // confirm password
-            if (userManager.ConfirmPassword(userModel.PASSWORD, confirmPassword) == true)
+            if (userManager.ConfirmPassword(model.User.PASSWORD, model.ConfirmPassword) == false)
             {
-                ModelState.AddModelError("ConfirmPassword", "Passwords do not match.");
+                ModelState.AddModelError("ConfirmPassword", "Passwords do not match");
                 return View();
             }
 
             if (ModelState.IsValid)
             {
-                userManager.CreateUser(userModel);
+                userManager.CreateUser(model.User);
                 return RedirectToAction("Index", "Home");
             }
-
+            
             return View();
         }
 
@@ -95,12 +105,12 @@ namespace PastebookWebApplication.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("PASSWORD", "Incorrect Password.");
+                    ModelState.AddModelError("PASSWORD", "Incorrect Password");
                 }
             }
             else
             {
-                ModelState.AddModelError("EMAIL_ADDRESS", "Email doesn't match any account.");
+                ModelState.AddModelError("EMAIL_ADDRESS", "Email doesn't match any account");
             }
 
             return View();

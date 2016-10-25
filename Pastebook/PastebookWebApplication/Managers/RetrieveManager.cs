@@ -10,9 +10,9 @@ namespace PastebookWebApplication.Managers
 {
     public class RetrieveManager
     {
-        public List<UserPostViewModel> RetrievePosts(int userID)
+        public List<PostViewModel> RetrievePosts(int userID)
         {
-            List<UserPostViewModel> modelList = new List<UserPostViewModel>();
+            List<PostViewModel> modelList = new List<PostViewModel>();
             List<PB_FRIEND> friends = new List<PB_FRIEND>();
             FriendManager friendManager = new FriendManager();
 
@@ -41,10 +41,39 @@ namespace PastebookWebApplication.Managers
                 userModel = userManager.RetrieveUserByID(post.POSTER_ID);
 
                 // add to view model
-                modelList.Add(new UserPostViewModel
+                modelList.Add(new PostViewModel
                 {
                     User = userModel,
                     Post = post
+                });
+            }
+
+            return modelList;
+        }
+
+        public List<ActionViewModel> RetrieveComment(int postID)
+        {
+            List<PB_COMMENT> comments = new List<PB_COMMENT>();
+            PB_COMMENT commentModel = new PB_COMMENT();
+            CommentManager commentManager = new CommentManager();
+
+            PB_USER userModel = new PB_USER();
+            UserManager userManager = new UserManager();
+
+            List<ActionViewModel> modelList = new List<ActionViewModel>();
+
+            // retrieve comments from post
+            comments = commentManager.RetrieveComments(postID);
+
+            foreach (var comment in comments)
+            {
+                //retrieve commenter details
+                userModel = userManager.RetrieveUserByID(comment.POSTER_ID);
+
+                modelList.Add(new ActionViewModel
+                {
+                    User = userModel,
+                    Comment = commentModel
                 });
             }
 

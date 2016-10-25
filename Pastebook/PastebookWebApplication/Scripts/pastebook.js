@@ -58,4 +58,19 @@
         }
 
     });
+
+    // settings
+
+    $('#aEditInfo').on('click', function () {
+        $('.frmViewInfo').hide();
+        $('#aEditInfo').hide(); //show on button submit
+    })
+
+    $('#aEditEmail').on('click', function () {
+        $('#aEditEmail').hide(); //show on button submit
+    })
+
+    $('#aEditPassword').on('click', function () {
+        $('#aEditPassword').hide(); //show on button submit
+    })
 });

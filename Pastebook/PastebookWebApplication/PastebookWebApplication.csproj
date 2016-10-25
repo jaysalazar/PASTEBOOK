@@ -166,12 +166,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Managers\DataTransferManager.cs" />
-    <Compile Include="Managers\RetrieveComment.cs" />
     <Compile Include="Managers\RetrieveManager.cs" />
-    <Compile Include="Models\LogInModel.cs" />
-    <Compile Include="Models\UserPostViewModel.cs" />
-    <Compile Include="Models\PostModel.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\ActionViewModel.cs" />
+    <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -228,11 +226,10 @@
     <Content Include="Views\Home\Settings.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Post\Posts.cshtml" />
-    <Content Include="Views\Post\Actions.cshtml" />
+    <Content Include="Views\Action\Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Action\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

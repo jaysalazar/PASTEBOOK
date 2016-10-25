@@ -1,23 +1,23 @@
-﻿@model IEnumerable<PastebookWebApplication.Models.UserPostViewModel>
+﻿@model IEnumerable<PastebookWebApplication.Models.PostViewModel>
 
 <div class="panel">
-    <div class="panel-heading"></div>
+    <div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span>Write a Post!</div>
     <div class="panel-body">
         @Html.TextArea("txtPost", new { @class = "txtaPost", id = "txtaContent", cols = "100", rows = "5", placeholder = "Write something..." })
         <a class="btn btn-primary pull-right" onclick="createPost()">Post</a>
     </div>
 </div>
 
-@* Post *@
 @foreach (var item in Model)
 {
+    @* Post *@
     <div class="panel">
         <div class="panel-heading col-md-12">
             <div class="col-md-2">
                 <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail">
             </div>
             <div class="col-md-10 txtFullName txtPosterName">
-                @Html.ActionLink(item.User.FIRST_NAME + " " + item.User.LAST_NAME, "Index", "Profile", new { username = item.User.USER_NAME }, null)
+                @Html.ActionLink(item.User.FIRST_NAME + " " + item.User.LAST_NAME, "Index", "Profile", new { username = item.User.USER_NAME }, new { @class = "name" })
             </div>
             <div class="col-md-8 txtDateCreated">
                 @item.Post.CREATED_DATE.ToString("MMMM dd, yyyy hh:mm tt")
@@ -28,47 +28,6 @@
                 @item.Post.CONTENT
             </div>
         </div>
-        <div class="panel-footer">
-            [INSERT COMMENT]
-            @*@{ Html.RenderAction("Comment", "Action", new { userID = item.UserEntity.ID }); }*@
-        </div>
+        @*@{ Html.RenderAction("Comment", "Action", new { postID = item.Post.ID }); }*@
     </div>
 }
-
-<!-- LIKE AND COMMENT PARTIAL VIEW -->
-@*<div class="panel-footer clearfix">
-            <div class="col-md-12 divAction">
-                <a href="#"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">1</label></a>
-            </div>
-            <div class="col-md-12 divAction">
-                <ul class="list-inline">
-                    <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">Like</label></a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-comment"></span><label for="txtaComment" id="lblActions">Comment</label></a></li>
-                </ul>
-                <div class="divAction">
-                    <div class="col-md-12 divAction">
-                        <div class="col-md-1 divImg">
-                            <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
-                        </div>
-                        <div class="col-md-10 divTxtaComment">
-                            <a href="#" class="txtPosterName">Abcdefghijklmnopqrstuvwxyz Abcdefghijklmnopqrstuvwxyz</a>
-                        </div>
-                        <div class="col-md-11 txtPost">
-                            asdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjdasdlaksdjalksjdlaksjdlaksjdlaksjdlaksjdlaksdaskdaslkdjalksdjalksdjalksjdalksjdalksdjalksdjlaksjdalksdjalksdjalksdjalksdjalskdjjskdjflskflksjflskdjflskjflskdjfslkdfjslkdfjsldkfjlklkasjd
-                        </div>
-                        <div class="col-md-10 col-md-offset-1 txtDateCreated">
-                            October 12, 2016 12:00pm
-                        </div>
-                    </div>
-                    <div class="col-md-12 divAction">
-                        <div class="col-md-1 divImg">
-                            <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
-                        </div>
-                        <div class="col-md-10 divTxtaComment">
-                            <textarea class="txtaPost" id="txtaComment" cols="67" rows="1" placeholder="Write a comment..."></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@

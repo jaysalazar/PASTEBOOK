@@ -28,7 +28,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li id="navUser">
                             @Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
-                                             new { username = Session["Username"].ToString() }, null)
+                                             new { username = Session["Username"].ToString() }, new { @class = "name" })
                         </li>
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li class="dropdown">
@@ -57,10 +57,10 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     @Html.ActionLink(Session["FirstName"].ToString(), "Index", "Profile",
-                                             new { username = Session["Username"].ToString() }, null)
+                                             new { username = Session["Username"].ToString() }, new { @class= "name", id = "aProfile" })
                                 </li>
                                 <li class="divider"></li>
-                                <li>@Html.ActionLink("Settings", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Settings", "Settings", "Home")</li>
                                 <li>@Html.ActionLink("Logout", "LogOut", "Account")</li>
                             </ul>
                         </li>

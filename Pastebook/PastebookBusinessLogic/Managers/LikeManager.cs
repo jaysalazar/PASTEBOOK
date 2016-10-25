@@ -10,16 +10,11 @@ namespace PastebookBusinessLogic.Managers
     {
         public int Like(PB_LIKE likeEntity)
         {
-            int result = 0;
+            int result = Add(likeEntity);
 
-            try
+            if (result == 1)
             {
-                result = Add(likeEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
+                result = CountLikes(likeEntity.POST_ID);
             }
 
             return result;
@@ -27,58 +22,20 @@ namespace PastebookBusinessLogic.Managers
 
         public int Unlike(PB_LIKE likeEntity)
         {
-            int result = 0;
-
-            try
-            {
-                result = Delete(likeEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
-
+            int result = Delete(likeEntity);
             return result;
         }
 
-        public int CountLikes(int postId)
+        public int CountLikes(int postID)
         {
-            int result = 0;
-
-            try
-            {
-                result = Retrieve(x => x.POST_ID == postId).Count();
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
-
+            int result = Retrieve(x => x.POST_ID == postID).Count();
             return result;
         }
 
-
-        public List<PB_LIKE> RetrieveLikes(int postId)
+        public List<PB_LIKE> RetrieveLikes(int postID)
         {
             List<PB_LIKE> likes = new List<PB_LIKE>();
-
-            try
-            {
-                var result = Retrieve(x => x.POST_ID == postId);
-
-                foreach (var like in result)
-                {
-                    likes.Add(like);
-                }
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
-            }
-
+            likes = Retrieve(x => x.POST_ID == postID);
             return likes;
         }
     }

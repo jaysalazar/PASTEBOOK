@@ -11,6 +11,13 @@
 //        // site/username
 //        public ActionResult Index(string username)
 //        {
+//HttpPostedFileBase file<- actionresult
+
+//using (MemoryStream ms = new MemoryStream())
+//{
+//file.InputStream.CopyTo(ms);
+//model.signup.PROFILE_PIC = ms.GetBuffer();
+//}
 //            if (Session["CurrentUserID"] != null)
 //            {
 //                // TODO:

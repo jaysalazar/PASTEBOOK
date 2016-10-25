@@ -12,7 +12,7 @@
             </a>
         </div>
         <div class="col-md-8 txtFullName">
-            @Html.ActionLink(Model.FIRST_NAME + " " + Model.LAST_NAME, "Index", "Profile", new { username = Model.USER_NAME }, null)
+            @Html.ActionLink(Model.FIRST_NAME + " " + Model.LAST_NAME, "Index", "Profile", new { username = Model.USER_NAME }, new { @class = "name" })
         </div>
         <div class="col-md-10">
             <div class="list-group">
@@ -29,7 +29,7 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
 
     <script>
         var CreatePostUrl = '@Url.Action("CreatePost", "Home")'

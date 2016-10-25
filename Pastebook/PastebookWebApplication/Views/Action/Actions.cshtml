@@ -1,0 +1,55 @@
+﻿@model IEnumerable<PastebookWebApplication.Models.ActionViewModel>
+
+@* Like *@
+<div class="panel-footer clearfix">
+    @foreach (var actionVM in Model)
+    { }
+        <div class="col-md-12 divAction">
+            @*likedby*@
+            <a href="@Url.Action("Like", "Action", new { postID = actionVM.Like.POST_ID })"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">@Model.Count()</label></a>
+        </div>
+        <div class="col-md-12 divAction">
+            <ul class="list-inline">
+                @*add like*@
+                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">Like</label></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-comment"></span><label for="txtaComment" id="lblActions">Comment</label></a></li>
+            </ul>
+
+
+
+            
+
+            @foreach (var comment in Model)
+            {
+                <div class="divAction">
+                    <div class="col-md-12 divAction">
+                        <div class="col-md-1 divImg">
+                            <a href="@Url.Action("Index", "Profile", new { username = item.User.USER_NAME })" class="txtPosterName">
+                                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                            </a>
+                        </div>
+                        <div class="col-md-10 divTxtaComment">
+                            <a href="@Url.Action("Index", "Profile", new { username = item.User.USER_NAME })" class="txtPosterName">@item.User.FIRST_NAME @item.User.LAST_NAME</a>
+                        </div>
+                        <div class="col-md-11 txtPost">
+                            @item.Comment.CONTENT
+                        </div>
+                        <div class="col-md-10 col-md-offset-1 txtDateCreated">
+                            @item.Comment.DATE_CREATED
+                        </div>
+                    </div>
+                    <div class="col-md-12 divAction">
+                        <div class="col-md-1 divImg">
+                            @*currentuser profile pic*@
+                            <a href="@Url.Action("Index", "Profile", new { username = item.User.USER_NAME })" class="txtPosterName">
+                                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                            </a>
+                        </div>
+                        <div class="col-md-10 divTxtaComment">
+                            <textarea class="txtaPost" id="txtaComment" cols="67" rows="1" placeholder="Write a comment..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

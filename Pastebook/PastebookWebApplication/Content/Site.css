@@ -32,6 +32,15 @@ textarea {
     width: 270px;
 }
 
+#aProfile {
+    text-align: center;
+    font-size: 20px;
+}
+
+.name {
+    text-transform: capitalize;
+}
+
 /* content */
 .wllLogin {
     margin-top: 80px;
@@ -92,12 +101,12 @@ h1, .divOr {
 }
 
 .navbar-form .input-group > .form-control {
-    width: 200px;
+    width: 280px;
 }
 
 .input-group {
     margin: 4px auto;
-    padding-left: 225px;
+    padding-left: 150px;
 }
 
 .input-group-addon {
@@ -114,6 +123,8 @@ h1, .divOr {
 /* content */
 .home {
     margin-top: 50px;
+    scrollbar-darkshadow-color: black;
+    overflow: hidden;
 }
 
 .list-group, .divAboutMe {
@@ -173,10 +184,6 @@ h1, .divOr {
     margin-left: 359px;
 }
 
-.txtEdit {
-    text-decoration: underline;
-}
-
 #lblActions {
     text-indent: 3px;
     text-decoration: none;
@@ -184,6 +191,25 @@ h1, .divOr {
     cursor: pointer;
 }
 
-    #lblActions:hover {
+    #lblActions:hover, .txtEdit:hover {
         text-decoration: underline;
     }
+
+/* Settings */
+/* content */
+#spnSettings {
+    font-size: 23px;
+}
+
+.pnlEdit {
+    border-radius: 2px;
+}
+
+.form-control-static {
+    padding: 0;
+}
+
+.lblViewDetails {
+    margin: 0;
+    padding: 0 !important;
+}
