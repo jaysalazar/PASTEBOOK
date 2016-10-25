@@ -24,8 +24,8 @@ namespace PastebookBusinessLogic.Managers
 
         public int UpdateUser(PB_USER userModel)
         {
-            userModel.DATE_CREATED = userModel.DATE_CREATED.ToUniversalTime();
             userModel.BIRTHDAY = userModel.BIRTHDAY.ToUniversalTime();
+            userModel.DATE_CREATED = userModel.DATE_CREATED.ToUniversalTime();
 
             int result = Edit(userModel);
 
