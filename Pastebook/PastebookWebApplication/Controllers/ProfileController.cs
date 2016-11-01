@@ -1,83 +1,61 @@
-﻿//using PastebookBusinessLogic.Managers;
-//using PastebookEntityFramework;
-//using PastebookWebApplication.Models;
-//using System.Collections.Generic;
-//using System.Web.Mvc;
+﻿using PastebookBusinessLogic.Managers;
+using PastebookEntityFramework;
+using PastebookWebApplication.Models;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
-//namespace PastebookWebApplication.Controllers
-//{
-//    public class ProfileController : Controller
-//    {
-//        // site/username
-//        public ActionResult Index(string username)
-//        {
-//HttpPostedFileBase file<- actionresult
+namespace PastebookWebApplication.Controllers
+{
+    public class ProfileController : Controller
+    {
+        [Route("{username}")]
+        public ActionResult Index(string username)
+        {
+            if (Session["CurrentUserID"] != null)
+            {
+                PB_USER userModel = new PB_USER();
+                UserManager userManager = new UserManager();
 
-//using (MemoryStream ms = new MemoryStream())
-//{
-//file.InputStream.CopyTo(ms);
-//model.signup.PROFILE_PIC = ms.GetBuffer();
-//}
-//            if (Session["CurrentUserID"] != null)
-//            {
-//                // TODO:
-//                // get email of current user
-//                // try to implement friend profile page
-//                // get any profile of any user using username and save as profile owner id
+                List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
+                CountryManager countryManager = new CountryManager();
 
-//                // saved current user for the mean time
-//                int userID = (int)Session["CurrentUserID"];
+                userModel = userManager.RetrieveSpecific(x => x.USER_NAME == username);
+                countries = countryManager.Retrieve();
 
-//                UserPostViewModel profileModel = new UserPostViewModel();
+                RegisterViewModel model = new RegisterViewModel
+                {
+                    User = userModel,
+                    Countries = countries
+                };
 
-//                PB_USER userModel = new PB_USER();
-//                UserManager userManager = new UserManager();
-//                userModel = userManager.RetrieveUserByID(userID);
+                return View(model);
+            }
 
-//                // save user creds to profileModel view to provide info for profile
-//                profileModel.UserEntity = userModel;
+            return RedirectToAction("LogIn", "Account");
+        }
 
-//                return View(profileModel);
-//            }
+        public ActionResult Timeline(int userID)
+        {
+            List<PostViewModel> modelList = new List<PostViewModel>();
+            List<PB_POST> posts = new List<PB_POST>();
+            PB_USER userModel = new PB_USER();
+            PostManager postManager = new PostManager();
+            UserManager userManager = new UserManager();
 
-//            return RedirectToAction("LogIn", "Account");
-//        }
-        
-//        public ActionResult Timeline(UserPostViewModel profileModel)
-//        {
-//            if (Session["CurrentUser"] != null)
-//            {
-//                // save post on postModel
-//                PB_POST postModel = new PB_POST()
-//                {
-//                    POSTER_ID = profileModel.UserEntity.ID,
-//                    // temp POID: current user
-//                    // TODO: /{username}
-//                    PROFILE_OWNER_ID = profileModel.UserEntity.ID,
-//                    CONTENT = profileModel.PostEntity.CONTENT
-//                };
+            posts = postManager.RetrievePostsOfUser(userID);
 
-//                // save post to DB
-//                PostManager postManager = new PostManager();
+            foreach (var post in posts)
+            {
+                userModel = userManager.RetrieveUserByID(post.POSTER_ID);
+                
+                modelList.Add(new PostViewModel
+                {
+                    User = userModel,
+                    Post = post
+                });
+            }
 
-//                postManager.CreatePost(postModel);
-
-//                // retrieve current user email
-//                int userID = (int)Session["CurrentUserID"];
-
-//                // save to userModel
-//                PB_USER userModel = new PB_USER();
-//                UserManager userManager = new UserManager();
-//                userModel = userManager.RetrieveUserByID(userID);
-
-//                List<PB_POST> posts = new List<PB_POST>();
-
-//                posts = postManager.RetrievePostsOfUser(userID);
-
-//                return View(posts);
-//            }
-
-//            return RedirectToAction("LogIn", "Account");
-//        }
-//    }
-//}
+            return PartialView(modelList);
+        }
+    }
+}

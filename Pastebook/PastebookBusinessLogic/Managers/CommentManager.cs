@@ -1,5 +1,6 @@
 ﻿using PastebookDataAccess;
 using PastebookEntityFramework;
+using System;
 using System.Collections.Generic;
 
 namespace PastebookBusinessLogic.Managers
@@ -8,18 +9,17 @@ namespace PastebookBusinessLogic.Managers
     {
         public int CreateComment(PB_COMMENT commentModel)
         {
-            int result = Add(commentModel);
-
-            return result;
+            commentModel.DATE_CREATED = DateTime.UtcNow;
+            return Add(commentModel);
         }
 
-        public List<PB_COMMENT> RetrieveComments(int postID)
-        {
-            List<PB_COMMENT> comments = new List<PB_COMMENT>();
+        //public List<PB_COMMENT> RetrieveComments(int postID)
+        //{
+        //    List<PB_COMMENT> comments = new List<PB_COMMENT>();
 
-            comments = Retrieve(x => x.POST_ID == postID);
+        //    comments = Retrieve();
 
-            return comments;
-        }
+        //    return comments;
+        //}
     }
 }

@@ -7,43 +7,36 @@ namespace PastebookBusinessLogic.Managers
 {
     public class FriendManager : Repository<PB_FRIEND>
     {
+        public int AddFriendRequest(PB_FRIEND friendEntity)
+        {
+            friendEntity.CREATED_DATE = DateTime.UtcNow;
+            friendEntity.REQUEST = "Y";
+            friendEntity.BLOCKED = "N";
+            return Add(friendEntity);
+        }
+
         public int AddFriend(PB_FRIEND friendEntity)
         {
-            int result = 0;
-
-            friendEntity.CREATED_DATE = DateTime.UtcNow;
-
-            try
+            if (friendEntity.REQUEST == "Y")
             {
-                result = Add(friendEntity);
-            }
-            catch (Exception ex)
-            {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
+                friendEntity.CREATED_DATE = DateTime.UtcNow;
+                friendEntity.REQUEST = "N";
+                return Add(friendEntity);
             }
 
-            return result;
+            return 0;
         }
-        
+
         public List<PB_FRIEND> RetrieveFriends(int userID)
         {
             List<PB_FRIEND> friends = new List<PB_FRIEND>();
 
-            try
-            {
-                var result = Retrieve(x => x.REQUEST == "N" && (x.USER_ID == userID || x.FRIEND_ID == userID));
+            var result = Retrieve(x => x.REQUEST == "N" && (x.USER_ID == userID || x.FRIEND_ID == userID));
 
-                foreach (var friend in result)
-                {
-                    friend.CREATED_DATE = friend.CREATED_DATE.ToLocalTime();
-                    friends.Add(friend);
-                }
-            }
-            catch (Exception ex)
+            foreach (var friend in result)
             {
-                List<Exception> exceptionList = new List<Exception>();
-                exceptionList.Add(ex);
+                friend.CREATED_DATE = friend.CREATED_DATE.ToLocalTime();
+                friends.Add(friend);
             }
 
             return friends;

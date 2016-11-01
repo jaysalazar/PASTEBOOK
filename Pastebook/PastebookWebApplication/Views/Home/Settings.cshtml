@@ -4,231 +4,377 @@
     ViewBag.Title = "Pastebook Settings";
 }
 
-@using (Html.BeginForm("Settings", "Home", FormMethod.Post))
-{
-    <div class="form-horizontal col-md-10 col-md-offset-1 home">
-        <div id="spnSettings"><span class="glyphicon glyphicon glyphicon-cog"></span>Settings</div>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading pnlEdit">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#editInfo">
-                            <span class="glyphicon glyphicon-user"></span>Edit User Information
+<div class="form-horizontal col-md-10 col-md-offset-1 home">
+    <div id="spnSettings"><span class="glyphicon glyphicon-cog"></span>Settings</div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading pnlEdit">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#editInfo">
+                        <span class="glyphicon glyphicon-user"></span>Personal Information
+                    </a>
+                </h4>
+            </div>
+            <div id="editInfo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <a href="#" class="pull-right" id="aEditInfo" data-toggle="collapse" data-target="#frmEditInfo">
+                            <span class="glyphicon glyphicon-pencil"></span>Edit
                         </a>
-                    </h4>
-                </div>
-                <div id="editInfo" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <a class="pull-right" id="aEditInfo" data-toggle="collapse" data-target="#frmEditInfo"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-                        </div>
-                        <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
-                            <div class="form-group frmViewInfo">
-                                @Html.LabelFor(model => model.User.USER_NAME, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    <p class="form-control-static">@Model.User.USER_NAME</p>
-                                </div>
-
-                                @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    <p class="form-control-static name">@Model.User.FIRST_NAME @Model.User.LAST_NAME</p>
-                                </div>
-
-                                @Html.LabelFor(model => model.User.GENDER, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @{
-                                        if (Model.User.GENDER == "m")
-                                        {
-                                            <p class="form-control-static">Male</p>
-                                        }
-                                        else if (Model.User.GENDER == "f")
-                                        {
-                                            <p class="form-control-static">Female</p>
-                                        }
-                                        else
-                                        {
-                                            <p class="form-control-static">Unspecified</p>
-                                        }
-                                    }
-                                </div>
-
-                                @Html.LabelFor(model => model.User.BIRTHDAY, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    <p class="form-control-static">@Model.User.BIRTHDAY.ToString("MMMM dd, yyyy")</p>
-                                </div>
-
-                                @Html.LabelFor(model => model.User.COUNTRY_ID, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @{
-                                        <p class="form-control-static">
-                                            @Model.Countries.Where(x => x.ID == Model.User.COUNTRY_ID).SingleOrDefault().COUNTRY
-                                        </p>
-                                    }
-                                </div>
-                                @Html.LabelFor(model => model.User.MOBILE_NO, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    <p class="form-control-static">@Model.User.MOBILE_NO</p>
-                                </div>
+                    </div>
+                    <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
+                        <div class="form-group frmViewInfo">
+                            @Html.LabelFor(model => model.User.USER_NAME,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Model.User.USER_NAME</p>
                             </div>
+
+                            @Html.Label("Name", htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                <p class="form-control-static name">@Model.User.FIRST_NAME @Model.User.LAST_NAME</p>
+                            </div>
+
+                            @Html.LabelFor(model => model.User.GENDER,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                @{
+                                    if (Model.User.GENDER == "m")
+                                    {
+                                        <p class="form-control-static">Male</p>
+                                    }
+                                    else if (Model.User.GENDER == "f")
+                                    {
+                                        <p class="form-control-static">Female</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="form-control-static">Unspecified</p>
+                                    }
+                                }
+                            </div>
+
+                            @Html.LabelFor(model => model.User.BIRTHDAY,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Model.User.BIRTHDAY.ToString("MMMM dd, yyyy")</p>
+                            </div>
+
+                            @Html.LabelFor(model => model.User.COUNTRY_ID,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                @{
+                                    <p class="form-control-static">
+                                        @Model.Countries.Where(x => x.ID == Model.User.COUNTRY_ID).SingleOrDefault().COUNTRY
+                                    </p>
+                                }
+                            </div>
+
+                            @Html.LabelFor(model => model.User.MOBILE_NO,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Model.User.MOBILE_NO</p>
+                            </div>
+                        </div>
+
+                        @using (Html.BeginForm("EditInformation", "Home", FormMethod.Post))
+                        {
                             <div class="form-group collapse" id="frmEditInfo">
-                                @Html.LabelFor(model => model.User.USER_NAME, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                                <div class="form-group required divRequired">
+                                    <span class="control-label">required field</span>
+                                </div>
+                                @Html.LabelFor(model => model.User.USER_NAME,
+                                               htmlAttributes: new { @class = "control-label required col-md-3 lblViewDetails lblEditDetails" })
                                 <div class="col-md-9">
                                     @{ Model.User.USER_NAME = ""; }
-                                    @Html.EditorFor(model => model.User.USER_NAME, new { htmlAttributes = new { @class = "form-control", placeholder = "Username" } })
+                                    @Html.EditorFor(model => model.User.USER_NAME,
+                                                    new
+                                                    {
+                                                        htmlAttributes = new
+                                                        {
+                                                            @class = "form-control txtboxEditDetails",
+                                                            id = "txtUsernameSettings",
+                                                            placeholder = "Username"
+                                                        }
+                                                    })
                                     @Html.ValidationMessageFor(model => model.User.USER_NAME, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnUsernameSettings">Username is already taken</span>
                                 </div>
 
-                                @Html.LabelFor(model => model.User.FIRST_NAME, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                                @Html.LabelFor(model => model.User.FIRST_NAME,
+                                               htmlAttributes: new { @class = "control-label required col-md-3 lblViewDetails lblEditDetails" })
                                 <div class="col-md-9">
                                     @{ Model.User.FIRST_NAME = ""; }
-                                    @Html.EditorFor(model => model.User.FIRST_NAME, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name" } })
+                                    @Html.EditorFor(model => model.User.FIRST_NAME,
+                                                    new
+                                                    {
+                                                        htmlAttributes = new
+                                                        {
+                                                            @class = "form-control txtboxEditDetails",
+                                                            placeholder = "First Name"
+                                                        }
+                                                    })
                                     @Html.ValidationMessageFor(model => model.User.FIRST_NAME, "", new { @class = "text-danger" })
                                 </div>
 
-                                @Html.LabelFor(model => model.User.LAST_NAME, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                                @Html.LabelFor(model => model.User.LAST_NAME,
+                                               htmlAttributes: new { @class = "control-label required col-md-3 lblViewDetails lblEditDetails" })
                                 <div class="col-md-9">
                                     @{ Model.User.LAST_NAME = ""; }
-                                    @Html.EditorFor(model => model.User.LAST_NAME, new { htmlAttributes = new { @class = "form-control", placeholder = "Last Name" } })
+                                    @Html.EditorFor(model => model.User.LAST_NAME,
+                                                    new
+                                                    {
+                                                        htmlAttributes = new
+                                                        {
+                                                            @class = "form-control txtboxEditDetails",
+                                                            placeholder = "Last Name"
+                                                        }
+                                                    })
                                     @Html.ValidationMessageFor(model => model.User.LAST_NAME, "", new { @class = "text-danger" })
                                 </div>
 
                                 @Html.LabelFor(model => model.User.GENDER, htmlAttributes: new { @class = "control-label col-md-3" })
                                 <div class="col-md-9">
-                                    <label class="radio-inline">
+                                    <label class="radio-inline txtboxEditDetails">
                                         @Html.RadioButtonFor(model => model.User.GENDER, "m") Male
                                     </label>
-                                    <label class="radio-inline">
+                                    <label class="radio-inline txtboxEditDetails">
                                         @Html.RadioButtonFor(model => model.User.GENDER, "f") Female
                                     </label>
-                                    <label class="radio-inline">
-                                        @Html.RadioButtonFor(model => model.User.GENDER, "u", new { @checked = "checked" }) Unspecified
+                                    <label class="radio-inline txtboxEditDetails">
+                                        @Html.RadioButtonFor(model => model.User.GENDER, "u") Unspecified
                                     </label>
                                 </div>
 
-                                @Html.LabelFor(model => model.User.BIRTHDAY, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                                @Html.LabelFor(model => model.User.BIRTHDAY,
+                                               htmlAttributes: new { @class = "control-label required col-md-3 lblViewDetails lblEditDetails" })
                                 <div class="col-md-9">
-                                    @Html.EditorFor(model => model.User.BIRTHDAY, new { htmlAttributes = new { @class = "form-control", placeholder = "mm/dd/yyyy" } })
+                                    @Html.EditorFor(model => model.User.BIRTHDAY,
+                                    new
+                                    {
+                                        htmlAttributes = new { @class = "form-control txtboxEditDetails", placeholder = "dd/mm/yyyy" }
+                                    })
                                     @Html.ValidationMessageFor(model => model.User.BIRTHDAY, "", new { @class = "text-danger" })
                                 </div>
 
-                                @Html.LabelFor(model => model.User.COUNTRY_ID, htmlAttributes: new { @class = "control-label col-md-5" })
-                                <div class="col-md-10">
+                                @Html.LabelFor(model => model.User.COUNTRY_ID,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.User.COUNTRY_ID = null; }
                                     @Html.DropDownListFor(model => model.User.COUNTRY_ID,
-                                  new SelectList(Model.Countries, "ID", "COUNTRY"),
-                                  "--Select Country--",
-                                  new { @class = "form-control" })
+                                                          new SelectList(Model.Countries, "ID", "COUNTRY"),
+                                                          "--Select Country--", new { @class = "form-control txtboxEditDetails" })
                                     @Html.ValidationMessageFor(model => model.User.COUNTRY_ID, "", new { @class = "text-danger" })
                                 </div>
 
-                                @Html.LabelFor(model => model.User.MOBILE_NO, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                                @Html.LabelFor(model => model.User.MOBILE_NO,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
                                 <div class="col-md-9">
-                                    @Html.EditorFor(model => model.User.MOBILE_NO, new { htmlAttributes = new { @class = "form-control" } })
+                                    @{ Model.User.MOBILE_NO = ""; }
+                                    @Html.EditorFor(model => model.User.MOBILE_NO,
+                                    new
+                                    {
+                                        htmlAttributes = new { @class = "form-control txtboxEditDetails", placeholder = "09991234567" }
+                                    })
                                     @Html.ValidationMessageFor(model => model.User.MOBILE_NO, "", new { @class = "text-danger" })
                                 </div>
 
-                                @Html.HiddenFor(x => x.User.EMAIL_ADDRESS)
-                                @Html.HiddenFor(x => x.User.PASSWORD)
-                                @Html.HiddenFor(x => x.User.SALT)
-                                @Html.HiddenFor(x => x.User.PROFILE_PIC)
-                                @Html.HiddenFor(x => x.User.ABOUT_ME)
-                                @Html.HiddenFor(x => x.User.ID)
-                                @Html.HiddenFor(x => x.User.DATE_CREATED)
-                                
                                 <div class="col-md-10 col-md-offset-4 control-label">
                                     @Html.ActionLink("Cancel", "Settings", "Home", new { @class = "btn btn-default" })
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-primary" id="btnInfo">Save</button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading pnlEdit">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#editEmail">
-                            <span class="glyphicon glyphicon-envelope"></span>Edit Email Address
-                        </a>
-                    </h4>
-                </div>
-                <div id="editEmail" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <a class="pull-right" id="aEditEmail" data-toggle="collapse" data-target="#frmEditEmail"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-                        </div>
-                        <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
-                            <div class="form-group" id="frmViewEmail">
-                                @Html.LabelFor(model => model.User.EMAIL_ADDRESS, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    <p class="form-control-static">@Model.User.EMAIL_ADDRESS</p>
-                                </div>
-                            </div>
-                            <div class="form-group collapse" id="frmEditEmail">
-                                @Html.Label("New Email", new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @{ Model.User.EMAIL_ADDRESS = ""; }
-                                    @Html.EditorFor(model => model.User.EMAIL_ADDRESS, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter new Email" } })
-                                    @Html.ValidationMessageFor(model => model.User.EMAIL_ADDRESS, "", new { @class = "text-danger" })
-                                </div>
-
-                                @Html.LabelFor(model => model.User.PASSWORD, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @{ Model.User.PASSWORD = ""; }
-                                    @Html.EditorFor(model => model.User.PASSWORD, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password" } })
-                                    @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
-                                </div>
-
-                                @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm Password" } })
-                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading pnlEdit">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#editPassword">
-                            <span class="glyphicon glyphicon-lock"></span>Edit Password
-                        </a>
-                    </h4>
-                </div>
-                <div id="editPassword" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <div class="col-md-12">
-                            <a class="pull-right" id="aEditPassword" data-toggle="collapse" data-target="#frmEditPassword"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-                        </div>
-                        <div class="col-md-6 col-md-offset-5" id="lblEditPassword">
-                            <label for="aEditPassword">Change Password</label>
-                        </div>
-                        <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
-                            <div class="form-group collapse" id="frmEditPassword">
-                                @Html.Label("Current", new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.User.PASSWORD, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                                    @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.Label("New", new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.User.PASSWORD, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                                    @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
-                                </div>
-                                @Html.Label("Confirm", new { @class = "control-label col-md-3 lblViewDetails" })
-                                <div class="col-md-9">
-                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", type = "password" } })
-                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                        </div>
+                                        }
                     </div>
                 </div>
             </div>
         </div>
-    </div>}
+
+        <div class="panel panel-default">
+            <div class="panel-heading pnlEdit">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#editEmail">
+                        <span class="glyphicon glyphicon-envelope"></span>Email Address
+                    </a>
+                </h4>
+            </div>
+            <div id="editEmail" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <a href="#" class="pull-right" id="aEditEmail" data-toggle="collapse" data-target="#frmEditEmail">
+                            <span class="glyphicon glyphicon-pencil"></span>Edit
+                        </a>
+                    </div>
+                    <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
+                        <div class="form-group" id="frmViewEmail">
+                            @Html.LabelFor(model => model.User.EMAIL_ADDRESS,
+                                               htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails" })
+                            <div class="col-md-9">
+                                <p class="form-control-static">@Model.User.EMAIL_ADDRESS</p>
+                            </div>
+                        </div>
+
+                        @using (Html.BeginForm("EditEmail", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group collapse" id="frmEditEmail">
+                                @Html.Label("New Email", new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.User.EMAIL_ADDRESS = ""; }
+                                    @Html.EditorFor(model => model.User.EMAIL_ADDRESS,
+                                     new
+                                     {
+                                         htmlAttributes = new
+                                         {
+                                             @class = "form-control txtboxEditDetails",
+                                             id = "txtEmailSettings",
+                                             type = "email",
+                                             placeholder = "Enter new Email"
+                                         }
+                                     })
+                                    @Html.ValidationMessageFor(model => model.User.EMAIL_ADDRESS, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnEmailSettings">Email is already taken</span>
+                                </div>
+
+                                @Html.LabelFor(model => model.User.PASSWORD,
+                                htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.User.PASSWORD = ""; }
+                                    @Html.EditorFor(model => model.User.PASSWORD,
+                                    new
+                                    {
+                                        htmlAttributes = new
+                                        {
+                                            @class = "form-control txtboxEditDetails",
+                                            id = "txtPasswordSettings",
+                                            type = "password",
+                                            placeholder = "Enter Password"
+                                        }
+                                    })
+                                    @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnPasswordSettings">Incorrect Password</span>
+                                </div>
+
+                                <div class="col-md-10 col-md-offset-4 control-label">
+                                    @Html.ActionLink("Cancel", "Settings", "Home", new { @class = "btn btn-default" })
+                                    <button type="submit" class="btn btn-primary" id="btnEmail">Save</button>
+                                </div>
+                            </div>
+                                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading pnlEdit">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#editPassword">
+                        <span class="glyphicon glyphicon-lock"></span>Edit Password
+                    </a>
+                </h4>
+            </div>
+            <div id="editPassword" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <a href="#" class="pull-right" id="aEditPassword" data-toggle="collapse" data-target="#frmEditPassword">
+                            <span class="glyphicon glyphicon-pencil"></span>Edit
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-md-offset-4" id="lblEditPassword">
+                        <label for="aEditPassword">Change Password</label>
+                    </div>
+                    <div class="form-horizontal txtPost col-md-7 col-md-offset-3">
+                        @using (Html.BeginForm("EditPassword", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group collapse" id="frmEditPassword">
+                                @Html.LabelFor(model => model.CurrentPassword,
+                                htmlAttributes: new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.CurrentPassword = ""; }
+                                    @Html.EditorFor(model => model.CurrentPassword,
+                                    new
+                                    {
+                                        htmlAttributes = new
+                                        {
+                                            @class = "form-control txtboxEditDetails",
+                                            id = "txtCurrentPassword",
+                                            type = "password",
+                                            placeholder = "Current Password"
+                                        }
+                                    })
+                                    @Html.ValidationMessageFor(model => model.CurrentPassword, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnCurrentPasswordSettings">Incorrect Password</span>
+                                </div>
+
+                                @Html.Label("New", new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.User.PASSWORD = ""; }
+                                    @Html.EditorFor(model => model.User.PASSWORD,
+                                                    new
+                                                    {
+                                                        htmlAttributes = new
+                                                        {
+                                                            @class = "form-control txtboxEditDetails",
+                                                            id = "txtNewPassword",
+                                                            name = "newPass",
+                                                            type = "password",
+                                                            placeholder = "New Password"
+                                                        }
+                                                    })
+                                    @Html.ValidationMessageFor(model => model.User.PASSWORD, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnConfirmNewPassword">Can't reuse current password</span>
+                                </div>
+
+                                @Html.Label("Confirm", new { @class = "control-label col-md-3 lblViewDetails lblEditDetails" })
+                                <div class="col-md-9">
+                                    @{ Model.ConfirmPassword = ""; }
+                                    @Html.EditorFor(model => model.ConfirmPassword,
+                                    new
+                                    {
+                                        htmlAttributes = new
+                                        {
+                                            @class = "form-control txtboxEditDetails",
+                                            id = "txtConfirmPasswordSettings",
+                                            type = "password",
+                                            placeholder = "Confirm Password"
+                                        }
+                                    })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                    <span class="text-danger txtError" id="spnConfirmPasswordSettings">Passwords do not match</span>
+                                </div>
+                                <div class="col-md-10 col-md-offset-4 control-label">
+                                    @Html.ActionLink("Cancel", "Settings", "Home", new { @class = "btn btn-default" })
+                                    <button type="submit" class="btn btn-primary" id="btnPass">Save</button>
+                                </div>
+                            </div>
+                                        }
+
+                        @Html.HiddenFor(x => x.User.ID)
+                        @Html.HiddenFor(x => x.User.USER_NAME)
+                        @Html.HiddenFor(x => x.User.EMAIL_ADDRESS)
+                        @Html.HiddenFor(x => x.User.PASSWORD)
+                        @Html.HiddenFor(x => x.User.SALT)
+                        @Html.HiddenFor(x => x.User.FIRST_NAME)
+                        @Html.HiddenFor(x => x.User.LAST_NAME)
+                        @Html.HiddenFor(x => x.User.BIRTHDAY)
+                        @Html.HiddenFor(x => x.User.COUNTRY_ID)
+                        @Html.HiddenFor(x => x.User.MOBILE_NO)
+                        @Html.HiddenFor(x => x.User.GENDER)
+                        @Html.HiddenFor(x => x.User.DATE_CREATED)
+                        @Html.HiddenFor(x => x.User.ABOUT_ME)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var CheckUsernameUrl = '@Url.Action("CheckUsername", "Account")'
+        var CheckEmailUrl = '@Url.Action("CheckEmail", "Account")'
+        var CheckPasswordUrl = '@Url.Action("CheckPassword", "Account")'
+    </script>
+    <script src="~/Scripts/pastebook/settings.js"></script>
 }

@@ -25,5 +25,29 @@ namespace PastebookWebApplication
             Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
             Response.Cache.SetNoStore();
         }
+
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    var ex = Server.GetLastError() as HttpException;
+
+        //    if (ex != null)
+        //    {
+        //        int errorCode = ex.GetHttpCode();
+
+        //        if (errorCode == 404)
+        //        {
+        //            Response.Redirect("~/Error/Error404");
+        //        }
+
+        //        else
+        //        {
+        //            Response.Redirect("~/Error/GlobalError");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("~/Error/GlobalError");
+        //    }
+        //}
     }
 }

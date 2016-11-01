@@ -1,10 +1,7 @@
 ﻿using PastebookBusinessLogic.Managers;
 using PastebookEntityFramework;
 using PastebookWebApplication.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace PastebookWebApplication.Managers
 {
@@ -12,21 +9,17 @@ namespace PastebookWebApplication.Managers
     {
         public List<PostViewModel> RetrievePosts(int userID)
         {
-            List<PostViewModel> modelList = new List<PostViewModel>();
+            List<PostViewModel> postModelList = new List<PostViewModel>();
             List<PB_FRIEND> friends = new List<PB_FRIEND>();
-            FriendManager friendManager = new FriendManager();
-
             List<PB_POST> posts = new List<PB_POST>();
-            PostManager postManager = new PostManager();
-
             PB_USER userModel = new PB_USER();
             UserManager userManager = new UserManager();
+            FriendManager friendManager = new FriendManager();
+            PostManager postManager = new PostManager();
 
-            // retrieve user's friends
             friends = friendManager.RetrieveFriends(userID);
 
-            // if user has no friend/s
-            if (friends == null)
+            if (friends == null || friends.Count == 0)
             {
                 posts = postManager.RetrievePostsOfUser(userID);
             }
@@ -37,47 +30,46 @@ namespace PastebookWebApplication.Managers
 
             foreach (var post in posts)
             {
-                // retrieve details of poster
                 userModel = userManager.RetrieveUserByID(post.POSTER_ID);
 
-                // add to view model
-                modelList.Add(new PostViewModel
+                postModelList.Add(new PostViewModel
                 {
                     User = userModel,
                     Post = post
                 });
             }
 
-            return modelList;
+            return postModelList;
         }
 
-        public List<ActionViewModel> RetrieveComment(int postID)
-        {
-            List<PB_COMMENT> comments = new List<PB_COMMENT>();
-            PB_COMMENT commentModel = new PB_COMMENT();
-            CommentManager commentManager = new CommentManager();
+        //public List<ActionViewModel> RetrieveComment(int postID)
+        //{
+        //    List<ActionViewModel> modelList = new List<ActionViewModel>();
 
-            PB_USER userModel = new PB_USER();
-            UserManager userManager = new UserManager();
+        //    List<PB_COMMENT> comments = new List<PB_COMMENT>();
+        //    PB_COMMENT commentModel = new PB_COMMENT();
+        //    CommentManager commentManager = new CommentManager();
 
-            List<ActionViewModel> modelList = new List<ActionViewModel>();
+        //    PB_USER userModel = new PB_USER();
+        //    UserManager userManager = new UserManager();
 
-            // retrieve comments from post
-            comments = commentManager.RetrieveComments(postID);
+        //    // retrieve comments from post
+        //    comments = commentManager.RetrieveComments(postID);
 
-            foreach (var comment in comments)
-            {
-                //retrieve commenter details
-                userModel = userManager.RetrieveUserByID(comment.POSTER_ID);
+        //    foreach (var comment in comments)
+        //    {
+        //        //retrieve commenter details
+        //        userModel = userManager.RetrieveUserByID(comment.POSTER_ID);
 
-                modelList.Add(new ActionViewModel
-                {
-                    User = userModel,
-                    Comment = commentModel
-                });
-            }
+        //        modelList.Add(new ActionViewModel
+        //        {
+        //            User = userModel,
+        //            Comment = comment,
+        //            PostID = postID
+        //        });
+        //    }
 
-            return modelList;
-        }
+        //    return modelList;
+        //}
     }
 }

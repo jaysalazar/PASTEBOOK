@@ -1,6 +1,7 @@
 ﻿using PastebookEntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PastebookWebApplication.Models
 {
@@ -10,7 +11,12 @@ namespace PastebookWebApplication.Models
 
         public List<REF_COUNTRY> Countries { get; set; }
 
-        [DisplayName("Confirm Password")]
+        [Required]
+        [DisplayName("Confirm")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DisplayName("Current")]
+        public string CurrentPassword { get; set; }
     }
 }

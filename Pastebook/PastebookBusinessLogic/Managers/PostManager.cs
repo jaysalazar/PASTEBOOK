@@ -10,27 +10,24 @@ namespace PastebookBusinessLogic.Managers
     {
         public int CreatePost(PB_POST postModel)
         {
-            // set created date to UTC
             postModel.CREATED_DATE = DateTime.UtcNow;
-
-            int result = Add(postModel);
-
-            return result;
+            return Add(postModel);
         }
 
         // timeline
         public List<PB_POST> RetrievePostsOfUser(int userID)
         {
             List<PB_POST> posts = new List<PB_POST>();
+            
+            var result = Retrieve(x => x.PROFILE_OWNER_ID == userID || x.POSTER_ID == userID);
 
-            // timeline: retrieves all posts of user and friends who posts to user's profile
-            posts = Retrieve(x => x.PROFILE_OWNER_ID == userID);
-
-            foreach (var post in posts)
+            foreach (var post in result)
             {
                 post.CREATED_DATE = post.CREATED_DATE.ToLocalTime();
                 posts.Add(post);
             }
+
+            posts = posts.OrderByDescending(x => x.CREATED_DATE).Take(100).ToList();
 
             return posts;
         }
@@ -42,7 +39,6 @@ namespace PastebookBusinessLogic.Managers
 
             foreach (var friend in friends)
             {
-                // newsfeed: retrieve posts of user and friends of user
                 var result = Retrieve(x => (x.POSTER_ID == friend.USER_ID || x.POSTER_ID == friend.FRIEND_ID) &&
                                      (x.PROFILE_OWNER_ID == friend.USER_ID || x.PROFILE_OWNER_ID == friend.FRIEND_ID)).ToList();
 
@@ -52,8 +48,7 @@ namespace PastebookBusinessLogic.Managers
                     posts.Add(post);
                 }
             }
-
-            // sort by date > remove duplicate > get top 100
+            
             posts = posts.OrderByDescending(x => x.CREATED_DATE).GroupBy(x => x.ID).Select(x => x.First()).Take(100).ToList();
 
             return posts;

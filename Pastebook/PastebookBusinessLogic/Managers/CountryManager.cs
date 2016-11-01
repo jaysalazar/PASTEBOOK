@@ -6,13 +6,13 @@ namespace PastebookBusinessLogic.Managers
 {
     public class CountryManager : Repository<REF_COUNTRY>
     {
-        public List<REF_COUNTRY> RetrieveAllCountries()
-        {
-            List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
+        //public List<REF_COUNTRY> RetrieveAllCountries()
+        //{
+        //    List<REF_COUNTRY> countries = new List<REF_COUNTRY>();
 
-            countries = RetrieveAll();
+        //    countries = Retrieve();
 
-            return countries;
-        }
+        //    return countries;
+        //}
     }
 }

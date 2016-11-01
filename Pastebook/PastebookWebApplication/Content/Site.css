@@ -51,7 +51,6 @@ textarea {
 }
 
 .frmLogin {
-    margin-top: 25px;
     margin-left: 60px;
 }
 
@@ -76,7 +75,7 @@ textarea {
     padding-right: 0;
 }
 
-h1, .divOr {
+h1, .divOr, #h2NotFound {
     text-align: center;
 }
 
@@ -164,16 +163,8 @@ h1, .divOr {
 /* Profile */
 /* content */
 .txtProfileFullName {
-    font-size: 24px;
+    font-size: 50px;
     text-decoration: none;
-}
-/* try using js (show on hover) */
-.flUpload, .btnUploadPicture {
-    display: none;
-}
-
-.divUploadPicture:hover, .btnUploadPicture {
-    display: block;
 }
 
 .divBtnGrp {
@@ -197,8 +188,13 @@ h1, .divOr {
 
 /* Settings */
 /* content */
-#spnSettings {
-    font-size: 23px;
+#spnSettings, #spnFriends {
+    font-size: 35px;
+}
+
+#spnNone {
+    font-size: 20px;
+    text-indent: 23px;
 }
 
 .pnlEdit {
@@ -212,4 +208,53 @@ h1, .divOr {
 .lblViewDetails {
     margin: 0;
     padding: 0 !important;
+}
+
+.lblEditDetails {
+    margin-top: 10px !important;
+}
+
+.txtboxEditDetails {
+    margin-bottom: 10px !important;
+}
+
+.txtError {
+    display: none;
+}
+
+.imgProfilePicture {
+    max-height: 350px;
+    height: 222px;
+}
+
+.glyphicon {
+    padding-right: 3px;
+}
+
+.col-md-9 {
+    width: 75%;
+    padding-left: 40px;
+}
+
+.frmViewDetails {
+    padding-left: 30px;
+}
+
+p.txtPost {
+    margin-bottom: 50px;
+}
+
+#h1404 {
+    font-size: 180px;
+    margin-top: 100px;
+}
+
+.form-group.required .control-label:after, .control-label.required:after {
+    content: " *";
+    color: #FF0000;
+}
+
+.divRequired {
+    margin-left: 120px;
+    margin-bottom: 0;
 }

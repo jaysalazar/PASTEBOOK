@@ -11,15 +11,13 @@ namespace PastebookDataAccess
     // source: http://www.tugberkugurlu.com/archive/generic-repository-pattern-entity-framework-asp-net-mvc-and-unit-testing-triangle
     public class Repository<T> where T : class
     {
-        public List<T> RetrieveAll()
+        public List<T> Retrieve()
         {
-            List<T> result = new List<T>();
-
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
-                    result = context.Set<T>().ToList();
+                    return context.Set<T>().ToList();
                 }
                 catch (Exception ex)
                 {
@@ -28,7 +26,7 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return null;
         }
 
         public List<T> Retrieve(Expression<Func<T, bool>> predicate)
@@ -51,15 +49,15 @@ namespace PastebookDataAccess
             return result;
         }
 
-        public T RetrieveSpecific(Expression<Func<T, bool>> predicate)
+        public List<PB_COMMENT> RetrieveComments(int postID)
         {
-            T result = null;
+            List<PB_COMMENT> comments = new List<PB_COMMENT>();
 
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
-                    result = context.Set<T>().Single(predicate);
+                    comments = context.PB_COMMENT.Where(x => x.POST_ID == postID).Include("PB_USER").ToList();
                 }
                 catch (Exception ex)
                 {
@@ -68,18 +66,34 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return comments;
+        }
+
+        public T RetrieveSpecific(Expression<Func<T, bool>> predicate)
+        {
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    return Retrieve(predicate).SingleOrDefault();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return null;
         }
 
         public bool Check(Expression<Func<T, bool>> predicate)
         {
-            bool result = false;
-
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
-                    result = context.Set<T>().Any(predicate);
+                    return context.Set<T>().Any(predicate);
                 }
                 catch (Exception ex)
                 {
@@ -88,19 +102,35 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return false;
+        }
+
+        public int Count(Expression<Func<T, bool>> predicate)
+        {
+            using (var context = new PASTEBOOK_DBEntities())
+            {
+                try
+                {
+                    return context.Set<T>().Where(predicate).ToList().Count();
+                }
+                catch (Exception ex)
+                {
+                    List<Exception> exceptionList = new List<Exception>();
+                    exceptionList.Add(ex);
+                }
+            }
+
+            return 0;
         }
 
         public int Add(T entity)
         {
-            int result = 0;
-
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
                     context.Set<T>().Add(entity);
-                    result = context.SaveChanges();
+                    return context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -109,19 +139,17 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return 0;
         }
 
         public int Edit(T entity)
         {
-            int result = 0;
-
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
                     context.Entry(entity).State = EntityState.Modified;
-                    result = context.SaveChanges();
+                    return context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -130,19 +158,17 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return 0;
         }
 
         public int Delete(T entity)
         {
-            int result = 0;
-
             using (var context = new PASTEBOOK_DBEntities())
             {
                 try
                 {
                     context.Set<T>().Remove(entity);
-                    result = context.SaveChanges();
+                    return context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -151,7 +177,7 @@ namespace PastebookDataAccess
                 }
             }
 
-            return result;
+            return 0;
         }
     }
 }

@@ -15,21 +15,15 @@ namespace PastebookBusinessLogic.Managers
             userModel.PASSWORD = passwordManager.GeneratePasswordHash(userModel.PASSWORD, out salt);
             userModel.SALT = salt;
             userModel.DATE_CREATED = DateTime.UtcNow;
-            userModel.BIRTHDAY = userModel.BIRTHDAY.ToUniversalTime();
 
-            int result = Add(userModel);
-
-            return result;
+            return Add(userModel);
         }
 
         public int UpdateUser(PB_USER userModel)
         {
-            userModel.BIRTHDAY = userModel.BIRTHDAY.ToUniversalTime();
             userModel.DATE_CREATED = userModel.DATE_CREATED.ToUniversalTime();
 
-            int result = Edit(userModel);
-
-            return result;
+            return Edit(userModel);
         }
 
         public PB_USER RetrieveUserByID(int userID)
@@ -37,8 +31,6 @@ namespace PastebookBusinessLogic.Managers
             PB_USER userModel = new PB_USER();
 
             userModel = RetrieveSpecific(x => x.ID == userID);
-
-            userModel.BIRTHDAY = userModel.BIRTHDAY.ToLocalTime();
             userModel.DATE_CREATED = userModel.DATE_CREATED.ToLocalTime();
 
             return userModel;
@@ -49,8 +41,6 @@ namespace PastebookBusinessLogic.Managers
             PB_USER userModel = new PB_USER();
 
             userModel = RetrieveSpecific(x => x.EMAIL_ADDRESS == email);
-
-            userModel.BIRTHDAY = userModel.BIRTHDAY.ToLocalTime();
             userModel.DATE_CREATED = userModel.DATE_CREATED.ToLocalTime();
 
             return userModel;
@@ -60,49 +50,36 @@ namespace PastebookBusinessLogic.Managers
         {
             List<PB_USER> users = new List<PB_USER>();
 
-            users = Retrieve(x => x.FIRST_NAME == name || x.LAST_NAME == name);
+            var result = Retrieve(x => x.FIRST_NAME == name || x.LAST_NAME == name);
 
-            foreach (var user in users)
+            foreach (var user in result)
             {
-                user.BIRTHDAY = user.BIRTHDAY.ToLocalTime();
+                user.DATE_CREATED = user.DATE_CREATED.ToLocalTime();
                 users.Add(user);
             }
 
             return users;
         }
 
-        public bool CheckPassword(string email, string password)
+        public bool CheckEmailAddress(string email)
         {
-            PB_USER user = new PB_USER();
-
-            user = RetrieveSpecific(x => x.EMAIL_ADDRESS == email);
-
-            PasswordManager passwordManager = new PasswordManager();
-
-            bool result = passwordManager.IsPasswordMatch(password, user.SALT, user.PASSWORD);
-
-            return result;
-        }
-
-        public bool CheckEmailAddress(string emailAddress)
-        {
-            bool result = Check(x => x.EMAIL_ADDRESS == emailAddress);
-
-            return result;
+            return Check(x => x.EMAIL_ADDRESS == email);
         }
 
         public bool CheckUsername(string username)
         {
-            bool result = Check(x => x.USER_NAME == username);
-
-            return result;
+            return Check(x => x.USER_NAME == username);
         }
 
-        public bool ConfirmPassword(string password, string confirmPassword)
+        public bool CheckPassword(string email, string password)
         {
-            if (password == confirmPassword)
+            PB_USER userModel = new PB_USER();
+            PasswordManager passwordManager = new PasswordManager();
+
+            if (CheckEmailAddress(email) == true)
             {
-                return true;
+                userModel = RetrieveSpecific(x => x.EMAIL_ADDRESS == email);
+                return passwordManager.IsPasswordMatch(password, userModel.SALT, userModel.PASSWORD);
             }
 
             return false;

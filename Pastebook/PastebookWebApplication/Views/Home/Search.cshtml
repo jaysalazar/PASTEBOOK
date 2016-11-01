@@ -1,51 +1,24 @@
-﻿@model IEnumerable<PastebookEntityFramework.PB_FRIEND>
+﻿@model IEnumerable<PastebookEntityFramework.PB_USER>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.USER_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FRIEND_ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.REQUEST)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BLOCKED)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATED_DATE)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.USER_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FRIEND_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.REQUEST)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BLOCKED)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATED_DATE)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@{
+    ViewBag.Title = "Pastebook Search";
 }
 
-</table>
+<h4>Search Results</h4>
+
+@foreach (var item in Model)
+{
+    <div class="panel col-md-4">
+        <div class="panel-body">
+            <div class="col-md-4">
+                <a href="@Url.Action("Index", "Profile", new { username = item.USER_NAME })">
+                    <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail">
+                </a>
+            </div>
+            <div class="col-md-8 txtFullName">
+                @Html.ActionLink(item.FIRST_NAME + " " + item.LAST_NAME, "Index", "Profile", new { username = item.USER_NAME }, new { @class = "name" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+}

@@ -29,35 +29,48 @@ namespace PastebookEntityFramework
             this.PB_POST1 = new HashSet<PB_POST>();
             this.PB_FRIEND2 = new HashSet<PB_FRIEND>();
         }
-        
+
         public int ID { get; set; }
 
         [Required]
         [DisplayName("Username")]
+        [StringLength(50, ErrorMessage = "{0} must not exceed 50 characters")]
+        [RegularExpression("([._]?)([a-zA-Z0-9]+)([._]?)([a-zA-Z0-9]+)([._]?)", ErrorMessage = "{0} should only contain letters, numbers, and characters: . or _")]
         public string USER_NAME { get; set; }
 
         [Required]
         [DisplayName("Password")]
+        [StringLength(50, ErrorMessage = "{0} must not exceed 50 characters")]
         public string PASSWORD { get; set; }
 
         public string SALT { get; set; }
 
         [Required]
         [DisplayName("First Name")]
+        [RegularExpression("[.'-]?[A-Za-z0-9]+[.'-]?[A-Za-z0-9]+[.'-]?", ErrorMessage = "{0} should only contain letters, numbers, and characters: ', -, or .")]
+        [StringLength(50, ErrorMessage = "{0} must not exceed 50 characters")]
         public string FIRST_NAME { get; set; }
 
         [Required]
         [DisplayName("Last Name")]
+        [RegularExpression("[.'-]?[A-Za-z0-9]+[.'-]?[A-Za-z0-9]+[.'-]?", ErrorMessage = "{0} should only contain letters, numbers, and characters: ', -, or .")]
+        [StringLength(50, ErrorMessage = "{0} must not exceed 50 characters")]
         public string LAST_NAME { get; set; }
 
         [Required]
         [DisplayName("Birthday")]
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [RegularExpression(@"([1-9]|0[1-9]|[12][0-9]|3[01])[/]([1-9]|0[1-9]|1[012])[/](19|20)\d\d", ErrorMessage = "{0} should be in dd/mm/yyyy")]
+        [DataType(DataType.Date)]
         public System.DateTime BIRTHDAY { get; set; }
 
         [DisplayName("Country")]
         public Nullable<int> COUNTRY_ID { get; set; }
 
         [DisplayName("Mobile Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"[0-9]*", ErrorMessage = "{0} must contain numbers")]
+        [StringLength(15, ErrorMessage = "{0} must not exceed 15 characters")]
         public string MOBILE_NO { get; set; }
 
         [DisplayName("Gender")]
@@ -67,12 +80,16 @@ namespace PastebookEntityFramework
 
         public System.DateTime DATE_CREATED { get; set; }
 
+        [StringLength(2000, ErrorMessage = "Maximum length reached.")]
         public string ABOUT_ME { get; set; }
 
         [Required]
         [DisplayName("Email")]
+        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
+        [StringLength(50, ErrorMessage = "{0} must not exceed 50 characters")]
         public string EMAIL_ADDRESS { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PB_COMMENT> PB_COMMENT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

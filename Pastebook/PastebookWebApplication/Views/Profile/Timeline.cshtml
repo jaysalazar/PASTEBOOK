@@ -1,24 +1,72 @@
-﻿@model IEnumerable<PastebookWebApplication.Models.PastebookModel>
+﻿@model IEnumerable<PastebookWebApplication.Models.PostViewModel>
 
-TIMELINE
-<table class="table">
-    <tr>
-        <th>PostId</th>
-        <th>Content</th>
-        <th>CreatedDate</th>
-        <th>PosterId</th>
-        <th>ProfileOwnerId</th>
-    </tr>
+<div class="panel">
+    <div class="panel-heading"><span class="glyphicon glyphicon-pencil"></span>Write a Post!</div>
+    <div class="panel-body">
+        @Html.TextArea("txtPost", new { @class = "txtaPost", id = "txtaContent", cols = "100", rows = "5", placeholder = "Write something..." })
+        <a class="btn btn-primary pull-right" onclick="createPost()">Post</a>
+    </div>
+</div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.PostEntity.ID</td>
-            <td>@item.PostEntity.CONTENT</td>
-            <td>@item.PostEntity.CREATED_DATE</td>
-            <td>@item.PostEntity.POSTER_ID</td>
-            <td>@item.PostEntity.PROFILE_OWNER_ID</td>
-        </tr>
-    }
 
-</table>
+@foreach (var item in Model)
+{
+    <div class="panel clearfix">
+        <div class="panel-heading col-md-10">
+            <div class="col-md-2">
+                <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="img-thumbnail">
+            </div>
+            <div class="col-md-10 txtFullName txtPosterName">
+                @Html.ActionLink(item.User.FIRST_NAME + " " + item.User.LAST_NAME, "Index", "Profile", new { username = item.User.USER_NAME }, new { @class = "name" })
+            </div>
+            <div class="col-md-8 txtDateCreated">
+                @item.Post.CREATED_DATE.ToString("MMMM dd, yyyy hh:mm tt")
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12 txtPost">
+                @item.Post.CONTENT
+            </div>
+        </div>
+        <div class="panel-footer clearfix">
+            <div class="col-md-12 divAction">
+                @*<a href="#"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">@Model.Select(x => x.Likes)</label></a>*@
+            </div>
+            <div class="col-md-12 divAction">
+                <ul class="list-inline">
+                    <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"></span><label id="lblActions">Like</label></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-comment"></span><label for="txtaComment_@item.Post.ID" id="lblActions">Comment</label></a></li>
+                </ul>
+                <div class="divAction">
+                    @*@foreach (var item in Model)
+                        {   //comment section
+                            <div class="col-md-12 divAction">
+                                <div class="col-md-1 divImg">
+                                    <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                                </div>
+                                <div class="col-md-10 divTxtaComment">
+                                    <a href="#" class="txtPosterName"> @item.User.FIRST_NAME @item.User.LAST_NAME</a>
+                                </div>
+                                <div class="col-md-11 txtPost">
+                                    @item.Comment.CONTENT
+                                </div>
+                                <div class="col-md-10 col-md-offset-1 txtDateCreated">
+                                    @item.Comment.DATE_CREATED.ToString("MMMM dd, yyyy hh:mm tt"))
+                                </div>
+                            </div>
+                        }*@
+
+                    <div class="col-md-12 divAction">
+                        <div class="col-md-1 divImg">
+                            <img src="~/Content/Images/default-profile-picture.png" alt="Profile Picture" class="imgCommenter">
+                        </div>
+                        <div class="col-md-10 divTxtaComment">
+                            <textarea class="txtaPost" id="txtaComment_@item.Post.ID" name="content" cols="65" rows="2" placeholder="Write a comment..."></textarea>
+                            <button class="btn btn-primary" id="btnComment_@item.Post.ID" value="@item.Post.ID" onclick="createComment(@item.Post.ID, this)">Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

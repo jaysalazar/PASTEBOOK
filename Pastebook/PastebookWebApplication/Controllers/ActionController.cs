@@ -2,84 +2,70 @@
 using PastebookEntityFramework;
 using PastebookWebApplication.Managers;
 using PastebookWebApplication.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace PastebookWebApplication.Controllers
 {
     public class ActionController : Controller
     {
-        // GET: Action
-        public ActionResult Comment(int postID)
-        {
-            List<ActionViewModel> modelList = new List<ActionViewModel>();
-            RetrieveManager manager = new RetrieveManager();
+        //public ActionResult Actions(int postID, ActionViewModel model, string content)
+        //{
+        //    if (Session["CurrentUserID"] != null)
+        //    {
+        //        RetrieveManager manager = new RetrieveManager();
+        //        CommentManager commentManager = new CommentManager();
+        //        List<ActionViewModel> modelList = new List<ActionViewModel>();
 
-            modelList = manager.RetrieveComment(postID);
+        //        model.PostID = postID;
 
-            return PartialView(modelList);
-        }
+        //        if (content != null)
+        //        {
+        //            model.Comment.CONTENT = content;
+        //            var result = commentManager.CreateComment(model.Comment);
 
-        public ActionResult Like(int postID)
-        {
-            List<ActionViewModel> modelList = new List<ActionViewModel>();
+        //            if (result == 1)
+        //            {
+        //                modelList = manager.RetrieveComment(model.PostID);
+        //            }
+        //        }
 
-            List<PB_LIKE> likes = new List<PB_LIKE>();
-            LikeManager likeManager = new LikeManager();
+        //        return PartialView(modelList);
+        //    }
 
-            likes = likeManager.RetrieveLikes(postID);
+        //    return RedirectToAction("LogIn", "Account");
+        //}
 
-            foreach (var like in likes)
-            {
-                PB_USER userModel = new PB_USER();
-                UserManager userManager = new UserManager();
+        //public ActionResult Like(int postID)
+        //{
+        //    if (Session["CurrentUserID"] != null)
+        //    {
 
-                // retrieve users who likes the post
-                userModel = userManager.RetrieveUserByID(like.LIKED_BY);
+        //        List<ActionViewModel> modelList = new List<ActionViewModel>();
 
-                modelList.Add(new ActionViewModel
-                {
-                    User = userModel,
-                    Like = like
-                });
-            }
-            
-            return PartialView(modelList);
-        }
+        //        List<PB_LIKE> likes = new List<PB_LIKE>();
+        //        LikeManager likeManager = new LikeManager();
 
-        public JsonResult AddLike(int postID, int likedBy)
-        {
-            LikeManager likeManager = new LikeManager();
+        //        likes = likeManager.RetrieveLikes(postID);
 
-            PB_LIKE like = new PB_LIKE
-            {
-                POST_ID = postID,
-                LIKED_BY = likedBy
-            };
+        //        foreach (var like in likes)
+        //        {
+        //            PB_USER userModel = new PB_USER();
+        //            UserManager userManager = new UserManager();
 
-            // number of likes
-            int result = likeManager.Like(like);
+        //            // retrieve users who likes the post
+        //            userModel = userManager.RetrieveUserByID(like.LIKED_BY);
 
-            return Json(new { Result = result });
-        }
+        //            modelList.Add(new ActionViewModel
+        //            {
+        //                User = userModel,
+        //                Like = like
+        //            });
+        //        }
 
-        public JsonResult CreateComment(int postID, int posterID, string content)
-        {
-            CommentManager commentManager = new CommentManager();
-
-            PB_COMMENT comment = new PB_COMMENT
-            {
-                POST_ID = postID,
-                POSTER_ID = posterID,
-                CONTENT = content
-            };
-
-            int result = commentManager.CreateComment(comment);
-
-            return Json(new { result = result }, JsonRequestBehavior.AllowGet);
-        }
+        //        return PartialView(modelList);
+        //    }
+        //    return RedirectToAction("LogIn", "Account");
+        //}
     }
 }
